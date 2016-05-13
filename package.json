@@ -13,7 +13,7 @@
 		"url": "git://github.com/tpoisot/shelf.git"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "mocha"
 	},
 	"dependencies": {
 		"diacritics": "~1.2.3"
