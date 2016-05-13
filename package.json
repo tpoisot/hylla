@@ -1,0 +1,11 @@
+{
+  "name": "shelf",
+  "version": "0.0.0",
+  "description": "References manager",
+  "main": "shelf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Timothée Poisot",
+  "license": "MIT"
+}
