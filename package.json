@@ -1,22 +1,22 @@
 {
-  "name": "shelf",
-  "version": "0.0.0",
-  "description": "References manager",
-  "license": "BSD",
-  "author": "Timothée Poisot",
-  "main": "shelf.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "diacritics": "~1.2.3"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/tpoisot/shelf.git"
-  },
-  "bugs": {
-    "url": "https://github.com/tpoisot/shelf/issues"
-  }
+	"name": "shelf",
+	"version": "0.0.0",
+	"description": "References manager",
+	"bugs": {
+		"url": "https://github.com/tpoisot/shelf/issues"
+	},
+	"license": "BSD",
+	"author": "Timothée Poisot",
+	"main": "shelf.js",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/tpoisot/shelf.git"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"diacritics": "~1.2.3"
+	},
+	"devDependencies": {}
 }
