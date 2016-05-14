@@ -36,13 +36,15 @@ describe('Library', function() {
 
   describe('getting entries', function() {
 
-    beforeEach(function() {
-      var library = path.resolve("./test/data");
-      var lib = shelf.Library(library);
+    it('should return something when a valid key is accessed', function() {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      // NOTE This will pick the first key by default
+      chai.assert.isDefined(Object.keys(lib.entries)[0]);
     });
-
-    it('should return something when a valid key is accessed');
-    it('should return undefined when an invalid key is accessed');
+    it('should return undefined when an invalid key is accessed', function() {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.isUndefined(lib.entry("ThisIsNotAnEntry"));
+    });
   });
 
 });
@@ -58,9 +60,7 @@ describe('Unique ID', function() {
   });
 
   describe('unicity', function() {
-    it('should return a unique number at the end if there is a duplicate', function() {
-      chai.assert.equal(0, 1);
-    });
+    it('should return a unique number at the end if there is a duplicate');
   });
 
 });

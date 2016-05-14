@@ -27,11 +27,17 @@ function Library(library) {
 }
 
 Library.prototype.entry = function(id) {
-  return this.entries[id];
+  if (id in this.entries) {
+    return this.entries[id];
+  } else {
+    return undefined;
+  }
 }
 
-Library.prototype.write = function () {
-  fs.writeFile(this.path + "/default.json", JSON.stringify(this.entries, null, 2), 'utf-8', function(err) { console.log(err);})
+Library.prototype.write = function() {
+  fs.writeFile(this.path + "/default.json", JSON.stringify(this.entries, null, 2), 'utf-8', function(err) {
+    console.log(err);
+  })
 };
 
 module.exports.Library = Library;
