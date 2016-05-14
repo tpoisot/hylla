@@ -1,12 +1,22 @@
 var assert = require('chai').assert;
+var shelf = require('../shelf.js');
+var path = require('path');
 
 // TODO add test data
 
 describe('Library', function() {
 
   describe('loading', function() {
+
     it('should create a default path if none is given', function () {
-      assert.equal(0, 1);
+      var lib = new shelf.Library();
+      assert.include(lib.path, ".pandoc");
+    });
+
+    it('should use the given path if a path is given', function () {
+      var library = path.resolve("./test/data");
+      var lib = new shelf.Library(library);
+      assert.equal(library, lib.path);
     });
   });
 

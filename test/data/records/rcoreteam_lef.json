@@ -1,0 +1,19 @@
+{
+    "URL": "http://www.r-project.org",
+    "author": [
+        {
+            "literal": "R Core Team"
+        }
+    ],
+    "id": "rcoreteam_lef",
+    "issued": {
+        "date-parts": [
+            [
+                2014
+            ]
+        ]
+    },
+    "publisher-place": "Vienna, Austria",
+    "title": "R: A Language and Environment for Statistical Computing",
+    "type": "report"
+}

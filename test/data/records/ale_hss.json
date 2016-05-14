@@ -1,0 +1,35 @@
+{
+    "DOI": "10.1111/j.1600\\%00130706.2010.18933.x",
+    "abstract": "Competition between coexisting species existing near their stable equilibrium can be obscured if they occupy separate habitats. T eories of habitat selection promise an ability to reveal the underlying ghost of competition by using isodars to infer the behavioural map of habitat selection. We tested the theory with two years of data on abundance and habitat preference by three Arctic rodent species living at low density along a gradient of wet to dry tundra on Herschel Island in Canada \u2019 s western Arctic. Generalist brown lemmings exhibited a constant partial preference toward wet tundra whereas specialist collared lemmings and voles occupied the driest and wettest zones respectively. Although both lemming species compete for habitats elsewhere in the Canadian Arctic, isodar analyses suggest that the three species occupy wet and dry habitats independently of one another on Herschel Island. Competition at this large scale may be hidden at low densi- ties, however, if the wet-dry dichotomy is too coarse. Analyses at a fi ner subdivision of habitat revealed that these species coexist by using diff erent microhabitats. Collared lemmings shifted their niche towards even drier habitat as the abundance of brown lemmings increased. We were thus able to reveal the ghost of competition lurking at large scales through a more refi ned analysis at smaller scales of density-dependent habitat use.",
+    "author": [
+        {
+            "family": "Ale",
+            "given": "Som B"
+        },
+        {
+            "family": "Morris",
+            "given": "Douglas W"
+        },
+        {
+            "family": "Dupuch",
+            "given": "Ang\u00e9lique"
+        },
+        {
+            "family": "Moore",
+            "given": "Debra E"
+        }
+    ],
+    "container-title": "Oikos",
+    "id": "ale_hss",
+    "issued": {
+        "date-parts": [
+            [
+                2011
+            ]
+        ]
+    },
+    "keyword": "competition,habitat selection",
+    "page": "1-10",
+    "title": "Habitat selection and the scale of ghostly coexistence among Arctic rodents",
+    "type": "article-journal"
+}

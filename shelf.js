@@ -1,17 +1,14 @@
 var diacritics = require('diacritics');
 var fs = require('fs');
 var os = require('os');
+var path = require('path');
 
-// console.log(os.homedir());
-
-function Library(path) {
-  if (path === undefined) {
-    console.log("No path given, assuming defaut location");
+function Library(library) {
+  if (library === undefined) {
     var home = process.env.HOME || process.env.USERPROFILE;
-    path = home + "/.pandoc";
+    library = home + "/.pandoc";
   }
-  this.path = path;
-  console.log("Using path: " + this.path);
+  this.path = path.resolve(library);
 
   // Build the path for records, files, and file db
   this.records = this.path + "/records/"
@@ -29,6 +26,4 @@ Library.prototype.entry = function(id) {
   console.log(this.entries[id]);
 }
 
-var lib = new Library();
-lib.entry("gravel_tti");
-lib.entry("poisot_dsi");
+module.exports.Library = Library;

@@ -1,0 +1,39 @@
+{
+    "DOI": "10.1128/AEM.67.11.5233-5239.2001",
+    "ISSN": "0099-2240 (Print)",
+    "abstract": "We designed five Pseudomonas-selective soil extract NAA media containing the selective properties of trimethoprim and sodium lauroyl sarcosine and 0 to 100% of the amount of Casamino Acids used in the classical Pseudomonas-selective Gould\u2019s S1 medium. All of the isolates were confirmed to be Pseudomonas by a Pseudomonas-specific OprF antibody and a Pseudomonas-specific PCR targeting 16S ribosomal DNA. The Pseudomonas isolates were characterized by classical physiological tests, repetitive extragenic palindromic-PCR, Fourier transform infrared spectroscopy, and carbon source utilization patterns. Several of these analyses showed that the amount of Casamino Acids significantly influenced the diversity of the recovered Pseudomonas isolates. Furthermore, the data suggested that specific Pseudomonas subpopulations were represented on the nutrient-poor media. The NAA 1:100 medium, containing ca. 15 mg of organic carbon per liter, consistently gave significantly higher Pseudomonas CFU counts than Gould\u2019s S1 when tested on four Danish soils. NAA 1:100 may, therefore, be a better medium than Gould\u2019s S1 for enumeration and isolation of Pseudomonas from the low-nutrient soil environment.",
+    "author": [
+        {
+            "family": "Aagot",
+            "given": "Nina"
+        },
+        {
+            "family": "Nybroe",
+            "given": "Ole"
+        },
+        {
+            "family": "Nielsen",
+            "given": "Preben"
+        },
+        {
+            "family": "Johnsen",
+            "given": "Kaare"
+        }
+    ],
+    "container-title": "Appl. Environ. Microbiol.",
+    "id": "aagot_apd",
+    "issue": "11",
+    "issued": {
+        "date-parts": [
+            [
+                2001,
+                11
+            ]
+        ]
+    },
+    "keyword": "methods",
+    "page": "5233-5239",
+    "title": "An altered Pseudomonas diversity is recovered from soil by using nutrient-poor Pseudomonas-selective soil extract media.",
+    "type": "article-journal",
+    "volume": "67"
+}

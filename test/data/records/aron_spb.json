@@ -1,0 +1,39 @@
+{
+    "ISSN": "0022-5193",
+    "URL": "http://www.sciencedirect.com/science/article/pii/S0022519384801502",
+    "abstract": "The annual incidence rates of some endemic infectious diseases are steady while others fluctuate dramatically, often in a regular cycle. In order to investigate the role of seasonality in driving cycles of recurrent epidemics, we analyze numerically the susceptible/exposed/infective/recovered (SEIR) epidemic model with seasonal transmission. We show that small amplitude periodic solutions exhibit a sequence of period-doubling bifurcations as the amplitude of seasonal variation increases, predicting a transition to chaos of the kind studied in other biological contexts. The epidemiological implication is that the seasonal mechanism generating biennial epidemics may not be able to account for small-amplitude recurrent epidemics of arbitrary periodicity.",
+    "accessed": {
+        "date-parts": [
+            [
+                2014,
+                10,
+                7
+            ]
+        ]
+    },
+    "author": [
+        {
+            "family": "Aron",
+            "given": "Joan L."
+        },
+        {
+            "family": "Schwartz",
+            "given": "Ira B."
+        }
+    ],
+    "container-title": "J. Theor. Biol.",
+    "id": "aron_spb",
+    "issue": "4",
+    "issued": {
+        "date-parts": [
+            [
+                1984
+            ]
+        ]
+    },
+    "keyword": "Communicable Diseases,Disease Outbreaks,England,Humans,Mathematics,Measles,Models, Biological,New York City,Periodicity,Seasons,Time Factors,Wales",
+    "page": "665-679",
+    "title": "Seasonality and period-doubling bifurcations in an epidemic model",
+    "type": "article-journal",
+    "volume": "110"
+}

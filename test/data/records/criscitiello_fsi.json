@@ -1,0 +1,40 @@
+{
+    "DOI": "10.1371/journal.ppat.1003110",
+    "accessed": {
+        "date-parts": [
+            [
+                2013,
+                2,
+                8
+            ]
+        ]
+    },
+    "author": [
+        {
+            "family": "Criscitiello",
+            "given": "Michael F."
+        },
+        {
+            "family": "Figueiredo",
+            "given": "Paul de"
+        }
+    ],
+    "container-title": "PLoS Pathog",
+    "files": {
+        "maintext": "criscitiello_fsi_maintext.pdf"
+    },
+    "id": "criscitiello_fsi",
+    "issue": "2",
+    "issued": {
+        "date-parts": [
+            [
+                2013,
+                2
+            ]
+        ]
+    },
+    "page": "e1003110",
+    "title": "Fifty Shades of Immune Defense",
+    "type": "article-journal",
+    "volume": "9"
+}
