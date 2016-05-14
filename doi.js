@@ -10,6 +10,10 @@ function get_json_from_doi(doi) {
   });
 }
 
+/* NOTE
+This might not be the right way. Maybe all of that can be done internally by one of the library function. I don't really know.
+*/
+
 function from_doi(doi) {
   // Download the file, return an object, delete
   get_json_from_doi(doi);
