@@ -1,12 +1,20 @@
 var diacritics = require('diacritics');
 
+function cleanWord(word) {
+  // Remove the punctuation
+  word = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+  // Remove the diacritics
+  word = diacritics.remove(word);
+  return word;
+}
+
 function formatName(name) {
   if (name.literal) {
     fname = name.literal;
   } else {
     fname = name.family;
   }
-  return diacritics.remove(fname).replace(/\s/g, '');
+  return cleanWord(fname).replace(/\s/g, '');
 }
 
 function Author(entry) {
@@ -21,4 +29,9 @@ function Author(entry) {
   }
 }
 
+function author(entry) {
+  return Author(entry).toLowerCase();
+}
+
 module.exports.Author = Author;
+module.exports.author = author;

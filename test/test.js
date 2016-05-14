@@ -67,6 +67,11 @@ describe('Unique ID', function() {
       chai.assert.equal(shelf.keys.Author(lib.entry("laliberte_dht")), "Laliberte")
     });
 
+    it('also works with lowercase authors', function (){
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.author(lib.entry("laliberte_dht")), "laliberte")
+    });
+
     it('should return the editor name if there are no authors');
   });
 
