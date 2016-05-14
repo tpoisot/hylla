@@ -54,9 +54,20 @@ describe('Unique ID', function() {
   describe('names', function() {
 
     it('should return anonymous if there are no authors');
+
     it('should return the last name if the first author is a person');
-    it('should return the first n characters if the first author is an institution');
-    it('should return the first characters if the name has less than three characters');
+
+    it('should return the institution name if the first author is an institution', function (){
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.Author(lib.entry("rcoreteam_lef")), "RCoreTeam")
+    });
+
+    it('should remove diacritics', function (){
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.Author(lib.entry("laliberte_dht")), "Laliberte")
+    });
+
+    it('should return the editor name if there are no authors');
   });
 
   describe('unicity', function() {
