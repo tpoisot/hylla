@@ -3,6 +3,7 @@ var os = require('os');
 var path = require('path');
 
 var keys = require('./keys.js');
+var doi = require('./doi.js');
 
 function Library(library) {
 

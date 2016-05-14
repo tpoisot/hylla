@@ -5,6 +5,10 @@ var fs = require('fs');
 
 var shelf = require('../shelf.js');
 
+// TODO DOI test
+// var dna = "10.1038/171737a0";
+// var dna_ref = get_json_from_doi(dna);
+
 
 describe('Library', function() {
 
@@ -57,17 +61,17 @@ describe('Unique ID', function() {
 
     it('should return the last name if the first author is a person');
 
-    it('should return the institution name if the first author is an institution', function (){
+    it('should return the institution name if the first author is an institution', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       chai.assert.equal(shelf.keys.Author(lib.entry("rcoreteam_lef")), "RCoreTeam")
     });
 
-    it('should remove diacritics', function (){
+    it('should remove diacritics', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       chai.assert.equal(shelf.keys.Author(lib.entry("laliberte_dht")), "Laliberte")
     });
 
-    it('also works with lowercase authors', function (){
+    it('also works with lowercase authors', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       chai.assert.equal(shelf.keys.author(lib.entry("laliberte_dht")), "laliberte")
     });
