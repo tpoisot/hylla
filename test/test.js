@@ -35,12 +35,14 @@ describe('Library', function() {
   });
 
   describe('getting entries', function() {
-    it('should return something when a valid key is accessed', function() {
-      chai.assert.equal(0, 1);
+
+    beforeEach(function() {
+      var library = path.resolve("./test/data");
+      var lib = shelf.Library(library);
     });
-    it('should return undefined when an invalid key is accessed', function() {
-      chai.assert.equal(0, 1);
-    });
+
+    it('should return something when a valid key is accessed');
+    it('should return undefined when an invalid key is accessed');
   });
 
 });
@@ -48,18 +50,11 @@ describe('Library', function() {
 describe('Unique ID', function() {
 
   describe('names', function() {
-    it('should return anonymous if there are no authors', function() {
-      chai.assert.equal(0, 1);
-    });
-    it('should return the last name if the first author is a person', function() {
-      chai.assert.equal(0, 1);
-    });
-    it('should return the first n characters if the first author is an institution', function() {
-      chai.assert.equal(0, 1);
-    });
-    it('should return the first characters if the name has less than three characters', function() {
-      chai.assert.equal(0, 1);
-    });
+
+    it('should return anonymous if there are no authors');
+    it('should return the last name if the first author is a person');
+    it('should return the first n characters if the first author is an institution');
+    it('should return the first characters if the name has less than three characters');
   });
 
   describe('unicity', function() {

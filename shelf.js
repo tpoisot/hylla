@@ -1,7 +1,8 @@
-var diacritics = require('diacritics');
 var fs = require('fs');
 var os = require('os');
 var path = require('path');
+
+var keys = require('./keys.js');
 
 function Library(library) {
 
@@ -26,7 +27,7 @@ function Library(library) {
 }
 
 Library.prototype.entry = function(id) {
-  console.log(this.entries[id]);
+  return this.entries[id];
 }
 
 Library.prototype.write = function () {
@@ -34,3 +35,4 @@ Library.prototype.write = function () {
 };
 
 module.exports.Library = Library;
+module.exports.keys = keys;
