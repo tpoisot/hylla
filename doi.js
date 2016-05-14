@@ -24,8 +24,4 @@ function from_doi(doi) {
   // fs.unlinkSync(fname);
 }
 
-var dna = "10.1038/171737a0";
-var dna_ref = from_doi(dna);
-
-
 module.exports.from_doi = from_doi;
