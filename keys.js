@@ -69,7 +69,7 @@ function Year(entry) {
 
 function Yr(entry) {
   var year = Year(entry);
-  year = year.substr(year.length - 2);
+  year = year.substr(-2);
   return year;
 }
 
