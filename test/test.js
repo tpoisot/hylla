@@ -81,6 +81,13 @@ describe('Unique ID', function() {
       chai.assert.equal(shelf.keys.AUTHOR(lib.entry("laliberte_dht")), "LALIBERTE");
     });
 
+    it('should also works with shortened author names', function() {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.AUT(lib.entry("laliberte_dht")), "LAL");
+      chai.assert.equal(shelf.keys.Aut(lib.entry("laliberte_dht")), "Lal");
+      chai.assert.equal(shelf.keys.aut(lib.entry("laliberte_dht")), "lal");
+    });
+
     it('should return the editor name if there are no authors');
   });
 

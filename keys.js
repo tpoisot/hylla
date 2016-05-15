@@ -38,6 +38,9 @@ function AUTHOR(entry) {
   return Author(entry).toUpperCase();
 }
 
+function Aut(entry) {return Author(entry).substr(0, 3);}
+function aut(entry) {return author(entry).substr(0, 3);}
+function AUT(entry) {return AUTHOR(entry).substr(0, 3);}
 
 
 
@@ -95,6 +98,11 @@ function author_Yr(entry) {
 module.exports.Author = Author;
 module.exports.author = author;
 module.exports.AUTHOR = AUTHOR;
+module.exports.Aut = Aut;
+module.exports.aut = aut;
+module.exports.AUT = AUT;
+
+
 module.exports.Year = Year;
 module.exports.Yr = Yr;
 
