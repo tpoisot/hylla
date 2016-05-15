@@ -14,6 +14,14 @@ function Library(library) {
   }
   this.path = path.resolve(library);
 
+  /* NOTE this might have to be changed later on
+  *  it currently assumes aut_yr_lett , which would be a relatively short scheme
+  */
+  this.keymaker = function(entry) {
+    return [keys.aut(entry), keys.Yr(entry), keys.title_first_letters(entry)].join("_");
+  }
+  // TODO allow to substitute a default
+
   // Build the path for records, files, and file db
   this.records = this.path + "/records/"
 
@@ -42,12 +50,20 @@ Library.prototype.entry = function(id) {
 Library.prototype.write = function() {
   fs.writeFile(this.path + "/default.json", JSON.stringify(this.entries, null, 2), 'utf-8', function(err) {
     console.log(err);
-  })
+  });
 };
 
 Library.prototype.new = function(entry) {
-  if(entry) {
-    entry.id = keys.generate(entry);
+  if (entry) {
+    var root_key = this.keymaker(entry);
+    var tentative_key = root_key;
+    var attempts = 1;
+    while(tentative_key in this.entries) {
+      attempts += 1;
+      tentative_key = root_key + "_" + String(attempts);
+    }
+    entry.id = tentative_key;
+    console.log(entry);
     // The reference is written to file
     fs.writeFileSync(this.records + "/" + entry.id + ".json", JSON.stringify(entry, null, 2), 'utf-8', function(err) {
       console.log(err);

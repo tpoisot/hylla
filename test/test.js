@@ -26,6 +26,13 @@ describe('Library', function() {
     });
   });
 
+  describe('adding references', function() {
+    it('should create a new key');
+    it('should create a new key with a unique identifier');
+    it('should create a new file when a key is created');
+    it('should load the updated library');
+  })
+
   describe('writing', function() {
 
     it('should write a default.json file in the path', function() {
