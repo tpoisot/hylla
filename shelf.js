@@ -19,12 +19,16 @@ function Library(library) {
 
   // Read entries
   this.entries = {};
+  this.read();
+  
+}
+
+Library.prototype.read = function(id) {
   var files = fs.readdirSync(this.records);
   for (var i = 0; i < files.length; i++) {
     var entry = require(this.records + files[i]);
     this.entries[entry.id] = entry;
   }
-
 }
 
 Library.prototype.entry = function(id) {
@@ -40,6 +44,15 @@ Library.prototype.write = function() {
     console.log(err);
   })
 };
+
+Library.prototype.new = function(entry) {
+  if(entry) {
+    entry.id = keys.generate(entry);
+    // TODO write file
+    // TODO reload
+
+  }
+}
 
 module.exports.Library = Library;
 module.exports.keys = keys;
