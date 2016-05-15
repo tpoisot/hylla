@@ -17,6 +17,7 @@ function formatName(name) {
   return cleanWord(fname).replace(/\s/g, '');
 }
 
+
 function Author(entry) {
   if (entry.author) {
     var A = entry.author[0];
@@ -31,6 +32,29 @@ function Author(entry) {
 
 function author(entry) {
   return Author(entry).toLowerCase();
+}
+
+function AUTHOR(entry) {
+  return Author(entry).toUpperCase();
+}
+
+
+
+
+function title_first_word(entry) {
+  if(entry.title) {
+    return 'XXXX';
+  } else {
+    return "notitle";
+  }
+}
+
+function title_first_letters(entry) {
+  if(entry.title) {
+    return 'XXXX';
+  } else {
+    return "???";
+  }
 }
 
 function Year(entry) {
@@ -48,6 +72,8 @@ function Yr(entry) {
   year = year.substr(year.length - 2);
   return year;
 }
+
+
 
 function authorYear(entry) {
   return author(entry) + Year(entry);
@@ -68,6 +94,7 @@ function author_Yr(entry) {
 // Piece-wise functions
 module.exports.Author = Author;
 module.exports.author = author;
+module.exports.AUTHOR = AUTHOR;
 module.exports.Year = Year;
 module.exports.Yr = Yr;
 

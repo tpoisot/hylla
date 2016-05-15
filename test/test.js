@@ -71,9 +71,14 @@ describe('Unique ID', function() {
       chai.assert.equal(shelf.keys.Author(lib.entry("laliberte_dht")), "Laliberte");
     });
 
-    it('also works with lowercase authors', function() {
+    it('should also works with lowercase authors', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       chai.assert.equal(shelf.keys.author(lib.entry("laliberte_dht")), "laliberte");
+    });
+
+    it('should also works with uppercase authors', function() {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.AUTHOR(lib.entry("laliberte_dht")), "LALIBERTE");
     });
 
     it('should return the editor name if there are no authors');
@@ -90,6 +95,12 @@ describe('Unique ID', function() {
     });
     it('should return the accessed year if there is no issued date present');
     it('should return ???? if there are no dates');
+  });
+
+  describe('title', function() {
+    it('should return the title first word');
+    it('should return the title first letters');
+    it('should return something even when there is no title');
   });
 
   describe('keymakers', function() {
@@ -109,6 +120,10 @@ describe('Unique ID', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       chai.assert.equal(shelf.keys.authorYr(lib.entry("laliberte_dht")), "laliberte10");
     });
+    it('should work with author_word');
+    it('should work with Author_word');
+    it('should work with author_letters');
+    it('should work with Author_letters');
   });
 
   describe('unicity', function() {
