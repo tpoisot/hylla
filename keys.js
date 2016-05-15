@@ -33,5 +33,17 @@ function author(entry) {
   return Author(entry).toLowerCase();
 }
 
+function Year(entry) {
+  dates = ['issued', 'accessed']
+  for(i in dates) {
+    if(dates[i] in entry) {
+      return entry[dates[i]]['date-parts'][0];
+    }
+  }
+  return 'unknown';
+}
+
 module.exports.Author = Author;
 module.exports.author = author;
+
+module.exports.Year = Year;

@@ -83,4 +83,13 @@ describe('Unique ID', function() {
     it('should return a unique number at the end if there is a duplicate');
   });
 
+  describe('date', function() {
+    it('should return the issued year if present', function () {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.Year(lib.entry("laliberte_dht")), "2010");
+    });
+    it('should return the accessed year if there is no issued date present');
+    it('should return unknown if there are no dates');
+  });
+
 });
