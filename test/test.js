@@ -106,8 +106,16 @@ describe('Unique ID', function() {
   });
 
   describe('title', function() {
-    it('should return the title first word');
-    it('should return the title first letters');
+    it('should return the title first word', function () {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.title_first_word(lib.entry("laliberte_dht")), "deforestation");
+    });
+    it('should return the title first letters', function () {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.title_first_letters(lib.entry("laliberte_dht")), "dht");
+    });
+    it('should return the title first letters even if there are less than three words');
+    it('should remove diacritics from the title');
     it('should return something even when there is no title');
   });
 

@@ -46,7 +46,8 @@ function AUT(entry) {return AUTHOR(entry).substr(0, 3);}
 
 function title_first_word(entry) {
   if(entry.title) {
-    return 'XXXX';
+    var title = cleanWord(entry.title);
+    return title.split(" ")[0].toLowerCase();
   } else {
     return "notitle";
   }
@@ -54,7 +55,8 @@ function title_first_word(entry) {
 
 function title_first_letters(entry) {
   if(entry.title) {
-    return 'XXXX';
+    var title = cleanWord(entry.title);
+    return title.split(" ").map(function(x){return x[0]}).join('').toLowerCase().substr(0, 3);
   } else {
     return "???";
   }
@@ -105,6 +107,9 @@ module.exports.AUT = AUT;
 
 module.exports.Year = Year;
 module.exports.Yr = Yr;
+
+module.exports.title_first_word = title_first_word;
+module.exports.title_first_letters = title_first_letters;
 
 // Key functions
 module.exports.author_Year = author_Year;
