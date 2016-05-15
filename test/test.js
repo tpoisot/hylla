@@ -89,6 +89,7 @@ describe('Unique ID', function() {
     });
 
     it('should return the editor name if there are no authors');
+    it('should work with short author names (less than 2 valid chars)');
   });
 
   describe('date', function() {
