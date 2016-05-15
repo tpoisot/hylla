@@ -37,13 +37,42 @@ function Year(entry) {
   dates = ['issued', 'accessed']
   for (i in dates) {
     if (dates[i] in entry) {
-      return entry[dates[i]]['date-parts'][0];
+      return String(entry[dates[i]]['date-parts'][0]);
     }
   }
-  return 'unknown';
+  return '????';
 }
 
+function Yr(entry) {
+  var year = Year(entry);
+  year = year.substr(year.length - 2);
+  return year;
+}
+
+function authorYear(entry) {
+  return author(entry) + Year(entry);
+}
+
+function author_Year(entry) {
+  return author(entry) + "_" + Year(entry);
+}
+
+function authorYr(entry) {
+  return author(entry) + Yr(entry);
+}
+
+function author_Yr(entry) {
+  return author(entry) + "_" + Yr(entry);
+}
+
+// Piece-wise functions
 module.exports.Author = Author;
 module.exports.author = author;
-
 module.exports.Year = Year;
+module.exports.Yr = Yr;
+
+// Key functions
+module.exports.author_Year = author_Year;
+module.exports.authorYear = authorYear;
+module.exports.author_Yr = author_Yr;
+module.exports.authorYr = authorYr;

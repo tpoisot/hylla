@@ -79,17 +79,40 @@ describe('Unique ID', function() {
     it('should return the editor name if there are no authors');
   });
 
-  describe('unicity', function() {
-    it('should return a unique number at the end if there is a duplicate');
-  });
-
   describe('date', function() {
     it('should return the issued year if present', function () {
       var lib = new shelf.Library(path.resolve("./test/data"));
       chai.assert.equal(shelf.keys.Year(lib.entry("laliberte_dht")), "2010");
     });
+    it('should work with the shortened year too', function () {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.Yr(lib.entry("laliberte_dht")), "10");
+    });
     it('should return the accessed year if there is no issued date present');
-    it('should return unknown if there are no dates');
+    it('should return ???? if there are no dates');
+  });
+
+  describe('keymakers', function() {
+    it('should work with author_Year', function() {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.author_Year(lib.entry("laliberte_dht")), "laliberte_2010");
+    });
+    it('should work with author_Yr', function() {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.author_Yr(lib.entry("laliberte_dht")), "laliberte_10");
+    });
+    it('should work with authorYear', function() {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.authorYear(lib.entry("laliberte_dht")), "laliberte2010");
+    });
+    it('should work with authorYr', function() {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(shelf.keys.authorYr(lib.entry("laliberte_dht")), "laliberte10");
+    });
+  });
+
+  describe('unicity', function() {
+    it('should return a unique number at the end if there is a duplicate');
   });
 
 });
