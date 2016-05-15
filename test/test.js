@@ -63,17 +63,17 @@ describe('Unique ID', function() {
 
     it('should return the institution name if the first author is an institution', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
-      chai.assert.equal(shelf.keys.Author(lib.entry("rcoreteam_lef")), "RCoreTeam")
+      chai.assert.equal(shelf.keys.Author(lib.entry("rcoreteam_lef")), "RCoreTeam");
     });
 
     it('should remove diacritics', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
-      chai.assert.equal(shelf.keys.Author(lib.entry("laliberte_dht")), "Laliberte")
+      chai.assert.equal(shelf.keys.Author(lib.entry("laliberte_dht")), "Laliberte");
     });
 
     it('also works with lowercase authors', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
-      chai.assert.equal(shelf.keys.author(lib.entry("laliberte_dht")), "laliberte")
+      chai.assert.equal(shelf.keys.author(lib.entry("laliberte_dht")), "laliberte");
     });
 
     it('should return the editor name if there are no authors');
