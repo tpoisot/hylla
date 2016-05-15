@@ -1,22 +1,27 @@
 {
-	"name": "shelf",
-	"version": "0.0.0",
-	"description": "References manager",
-	"bugs": {
-		"url": "https://github.com/tpoisot/shelf/issues"
-	},
-	"license": "BSD",
-	"author": "Timothée Poisot",
-	"main": "shelf.js",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/tpoisot/shelf.git"
-	},
-	"scripts": {
-		"test": "mocha"
-	},
-	"dependencies": {
-		"diacritics": "~1.2.3"
-	},
-	"devDependencies": {}
+  "name": "shelf",
+  "version": "0.0.0",
+  "description": "References manager",
+  "bugs": {
+    "url": "https://github.com/tpoisot/shelf/issues"
+  },
+  "license": "MIT",
+  "author": "Timothée Poisot",
+  "main": "shelf.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tpoisot/shelf.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "crypto": "0.0.3",
+    "diacritics": "^1.2.3",
+    "fs": "0.0.2",
+    "os": "^0.1.1",
+    "path": "^0.12.7",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {}
 }
