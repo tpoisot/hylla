@@ -63,7 +63,7 @@ function title_first_letters(entry) {
 }
 
 function Year(entry) {
-  dates = ['issued', 'accessed']
+  dates = ['issued', 'deposited', 'accessed']
   for (i in dates) {
     if (dates[i] in entry) {
       return String(entry[dates[i]]['date-parts'][0]);

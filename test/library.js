@@ -1,4 +1,3 @@
-
 describe('Library', function() {
 
   describe('loading', function() {

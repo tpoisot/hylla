@@ -77,3 +77,4 @@ Library.prototype.new = function(entry) {
 
 module.exports.Library = Library;
 module.exports.keys = keys;
+module.exports.doi = doi;

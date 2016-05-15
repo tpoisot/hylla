@@ -1,4 +1,3 @@
-
 describe('Entries', function() {
 
   describe('getting entries', function() {
