@@ -63,7 +63,6 @@ Library.prototype.new = function(entry) {
       tentative_key = root_key + "_" + String(attempts);
     }
     entry.id = tentative_key;
-    console.log(entry);
     // The reference is written to file
     fs.writeFileSync(this.records + "/" + entry.id + ".json", JSON.stringify(entry, null, 2), 'utf-8', function(err) {
       console.log(err);

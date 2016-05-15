@@ -13,8 +13,20 @@ describe('Entries', function() {
     });
   });
 
-  describe('adding references', function() {
-    it('should create a new key');
+  describe('adding references', function() {      
+    it('should create a new key', function() {
+      var doi = "10.1111/ecog.01748";
+      var ref = shelf.doi.from_doi(doi);
+      shelf.keys.Year(ref); // TODO remove
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      var newref = lib.new(ref);
+      // First we check the key
+      chai.assert.equal(newref, 'gra_15_tat');
+      // Then we remove the file
+      fs.unlinkSync(lib.records + "/" + newref + ".json");
+
+
+    });
     it('should create a new key with a unique identifier');
     it('should create a new file when a key is created');
     it('should load the updated library');
