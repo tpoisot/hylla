@@ -39,7 +39,17 @@ describe('Entries', function() {
       fs.unlinkSync(lib.records + "/" + newref2 + ".json");
     });
 
-    it('should create a new file when a key is created');
+    it('should create a new file when a key is created', function() {
+      var doi = "10.1111/ecog.01748";
+      var ref = shelf.doi.from_doi(doi);
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      var newref = lib.new(ref);
+      // First we check the key
+      chai.assert.equal(newref, 'gra_15_tat');
+      chai.assert.isFile(lib.records + "/" + newref + ".json");
+      // Then we remove the file
+      fs.unlinkSync(lib.records + "/" + newref + ".json");
+    });
 
     it('should load the updated library');
 
