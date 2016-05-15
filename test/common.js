@@ -6,3 +6,5 @@ global.fs = require('fs');
 global.shelf = require('../shelf.js');
 
 process.env.NODE_ENV = 'test';
+
+// TODO create library by querying DOIs? Maybe?
