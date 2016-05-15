@@ -20,7 +20,7 @@ function Library(library) {
   // Read entries
   this.entries = {};
   this.read();
-  
+
 }
 
 Library.prototype.read = function(id) {
@@ -48,9 +48,14 @@ Library.prototype.write = function() {
 Library.prototype.new = function(entry) {
   if(entry) {
     entry.id = keys.generate(entry);
-    // TODO write file
-    // TODO reload
-
+    // The reference is written to file
+    fs.writeFileSync(this.records + "/" + entry.id + ".json", JSON.stringify(entry, null, 2), 'utf-8', function(err) {
+      console.log(err);
+    });
+    // The library is reloaded immediately after
+    this.read();
+    // NOTE the id of the new reference is returned because it might be useful
+    return entry.id;
   }
 }
 
