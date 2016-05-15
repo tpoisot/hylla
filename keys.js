@@ -63,10 +63,17 @@ function title_first_letters(entry) {
 }
 
 function Year(entry) {
-  dates = ['issued', 'deposited', 'accessed']
+  dates = ['deposited', 'indexed', 'issued', 'accessed'];
   for (i in dates) {
-    if (dates[i] in entry) {
-      return String(entry[dates[i]]['date-parts'][0]);
+    var date_field = dates[i];
+    if(date_field in entry) {
+      if ('timestamp' in entry[date_field]) {
+        var date = new Date(entry[date_field]['timestamp']);
+        return String(date.getFullYear());
+      } else {
+        var parts = entry[date_field]['date-parts'];
+        return String(parts[0][0]);
+      }
     }
   }
   return '????';
