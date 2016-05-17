@@ -24,6 +24,8 @@ function Library(library) {
 
   // Build the path for records, files, and file db
   this.records = this.path + "/records/"
+  // TODO files
+  // TODO check that all of these paths are directories
 
   // Read entries
   this.entries = {};
