@@ -47,29 +47,6 @@ function Author(entry) {
   }
 }
 
-function author(entry) {
-  return Author(entry).toLowerCase();
-}
-
-function AUTHOR(entry) {
-  return Author(entry).toUpperCase();
-}
-
-function Aut(entry) {return Author(entry).substr(0, 3);}
-function aut(entry) {return author(entry).substr(0, 3);}
-function AUT(entry) {return AUTHOR(entry).substr(0, 3);}
-
-
-
-function title_first_word(entry) {
-  if(entry.title) {
-    var title = cleanWord(entry.title);
-    return title.split(" ")[0].toLowerCase();
-  } else {
-    return "notitle";
-  }
-}
-
 function title_first_letters(entry) {
   if(entry.title) {
     var title = cleanWord(entry.title);
@@ -102,44 +79,27 @@ function Yr(entry) {
   return year;
 }
 
-
-/**
- Return a citation in the authorYear formatName
- @param {Object} entry the entry in the citeproc format
-*/
-function authorYear(entry) {
-  return author(entry) + Year(entry);
-}
-
-function author_Year(entry) {
-  return author(entry) + "_" + Year(entry);
-}
-
-function authorYr(entry) {
-  return author(entry) + Yr(entry);
-}
-
-function author_Yr(entry) {
-  return author(entry) + "_" + Yr(entry);
+function generate(entry, lib) {
+  var root_aut = Author(entry.content).toLowerCase().substr(0,4);
+  var root_dat = Yr(entry.content);
+  var root_let = title_first_letters(entry.content);
+  var root_key = root_aut + root_dat + root_let;
+  var trial_key = root_key;
+  var trials = 1;
+  while(trial_key in lib.entries) {
+    trials += 1;
+    trial_key = root_key + String(trials);
+  }
+  return trial_key;
 }
 
 // Piece-wise functions
 module.exports.Author = Author;
-module.exports.author = author;
-module.exports.AUTHOR = AUTHOR;
-module.exports.Aut = Aut;
-module.exports.aut = aut;
-module.exports.AUT = AUT;
-
 
 module.exports.Year = Year;
 module.exports.Yr = Yr;
 
-module.exports.title_first_word = title_first_word;
 module.exports.title_first_letters = title_first_letters;
 
 // Key functions
-module.exports.author_Year = author_Year;
-module.exports.authorYear = authorYear;
-module.exports.author_Yr = author_Yr;
-module.exports.authorYr = authorYr;
+module.exports.generate = generate;
