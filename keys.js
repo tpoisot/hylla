@@ -79,14 +79,14 @@ function Yr(entry) {
   return year;
 }
 
-function generate(entry, lib) {
-  var root_aut = Author(entry.content).toLowerCase().substr(0,4);
-  var root_dat = Yr(entry.content);
-  var root_let = title_first_letters(entry.content);
+function generate(entry, current_names) {
+  var root_aut = Author(entry).toLowerCase().substr(0,4);
+  var root_dat = Yr(entry);
+  var root_let = title_first_letters(entry);
   var root_key = root_aut + root_dat + root_let;
   var trial_key = root_key;
   var trials = 1;
-  while(trial_key in lib.entries) {
+  while(trial_key in current_names) {
     trials += 1;
     trial_key = root_key + String(trials);
   }
