@@ -37,11 +37,9 @@ Library.prototype.read = function(id) {
 }
 
 Library.prototype.entry = function(id) {
-  if (id in this.entries) {
-    return this.entries[id];
-  } else {
-    return undefined;
-  }
+  var ok = this.entries.filter(function(element, index, array) {element.id() == id});
+  console.log(ok);
+  return ok[0];
 }
 
 Library.prototype.write = function() {
@@ -52,6 +50,8 @@ Library.prototype.write = function() {
 
 Library.prototype.new = function(infos) {
   var entry = new entries.Entry(infos, this);
+  entry.id();
+  console.log(entry.id());
   // The reference is written to file
   fs.writeFileSync(this.records + "/" + entry.id() + ".json", entry.json(), 'utf-8', function(err) {
       console.log(err);
