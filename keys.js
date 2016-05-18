@@ -79,20 +79,6 @@ function Yr(entry) {
   return year;
 }
 
-function generate(entry, current_names) {
-  var root_aut = Author(entry).toLowerCase().substr(0,4);
-  var root_dat = Yr(entry);
-  var root_let = title_first_letters(entry);
-  var root_key = root_aut + root_dat + root_let;
-  var trial_key = root_key;
-  var trials = 1;
-  while(trial_key in current_names) {
-    trials += 1;
-    trial_key = root_key + String(trials);
-  }
-  return trial_key;
-}
-
 // Piece-wise functions
 module.exports.Author = Author;
 
@@ -100,6 +86,3 @@ module.exports.Year = Year;
 module.exports.Yr = Yr;
 
 module.exports.title_first_letters = title_first_letters;
-
-// Key functions
-module.exports.generate = generate;

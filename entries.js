@@ -2,17 +2,15 @@ var fs = require('fs');
 var keys = require('./keys.js');
 
 
-function Entry(entry, lib) {
+function Entry(entry) {
   this.content = entry;
-  this.library = lib;
 }
 
 Entry.prototype.id = function() {
   if(this.content.id) {
     return this.content.id;
   } else {
-    this.content.id = keys.generate(this.content, this.library.entries);
-    this.id();
+    return undefined;
   }
 }
 

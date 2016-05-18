@@ -4,9 +4,10 @@ describe('Entries', function() {
 
     it('should return something when a valid key is accessed', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
-      // NOTE This will pick the first key by default
-      chai.assert.isDefined(Object.keys(lib.entries)[0]);
+      var ref_0_key = lib.entries[0].id();
+      chai.assert.isDefined(lib.entry(ref_0_key));
     });
+
     it('should return undefined when an invalid key is accessed', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       chai.assert.isUndefined(lib.entry("ThisIsNotAnEntry"));
@@ -20,7 +21,7 @@ describe('Entries', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       var newref = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gra15tat');
+      chai.assert.equal(newref, 'gray15tat');
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
     });
@@ -32,8 +33,8 @@ describe('Entries', function() {
       var newref = lib.new(ref);
       var newref2 = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gra15tat');
-      chai.assert.equal(newref2, 'gra15tat2');
+      chai.assert.equal(newref, 'gray15tat');
+      chai.assert.equal(newref2, 'gray15tat2');
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
       fs.unlinkSync(lib.records + "/" + newref2 + ".json");
@@ -45,7 +46,7 @@ describe('Entries', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       var newref = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gra15tat');
+      chai.assert.equal(newref, 'gray15tat');
       chai.assert.isFile(lib.records + "/" + newref + ".json");
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
