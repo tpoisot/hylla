@@ -18,7 +18,7 @@ function Library(library) {
   *  it currently assumes aut_yr_lett , which would be a relatively short scheme
   */
   this.keymaker = function(entry) {
-    return [keys.aut(entry), keys.Yr(entry), keys.title_first_letters(entry)].join("_");
+    return [keys.aut(entry), keys.Yr(entry), keys.title_first_letters(entry)].join("");
   }
   // TODO allow to substitute a default
 
@@ -62,7 +62,7 @@ Library.prototype.new = function(entry) {
     var attempts = 1;
     while(tentative_key in this.entries) {
       attempts += 1;
-      tentative_key = root_key + "_" + String(attempts);
+      tentative_key = root_key + String(attempts);
     }
     entry.id = tentative_key;
     // The reference is written to file

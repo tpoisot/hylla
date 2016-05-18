@@ -2,7 +2,7 @@ var diacritics = require('diacritics');
 
 function cleanWord(word) {
   // Remove the punctuation
-  word = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+  word = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/[0-9]/g, "");
   // Remove the diacritics
   word = diacritics.remove(word);
   return word;
@@ -63,7 +63,7 @@ function title_first_letters(entry) {
 }
 
 function Year(entry) {
-  dates = ['deposited', 'indexed', 'issued', 'accessed'];
+  dates = ['issued', 'deposited', 'indexed', 'accessed'];
   for (i in dates) {
     var date_field = dates[i];
     if(date_field in entry) {

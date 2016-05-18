@@ -20,7 +20,7 @@ describe('Entries', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       var newref = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gra_15_tat');
+      chai.assert.equal(newref, 'gra15tat');
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
     });
@@ -32,8 +32,8 @@ describe('Entries', function() {
       var newref = lib.new(ref);
       var newref2 = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gra_15_tat');
-      chai.assert.equal(newref2, 'gra_15_tat_2');
+      chai.assert.equal(newref, 'gra15tat');
+      chai.assert.equal(newref2, 'gra15tat2');
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
       fs.unlinkSync(lib.records + "/" + newref2 + ".json");
@@ -45,7 +45,7 @@ describe('Entries', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       var newref = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gra_15_tat');
+      chai.assert.equal(newref, 'gra15tat');
       chai.assert.isFile(lib.records + "/" + newref + ".json");
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
