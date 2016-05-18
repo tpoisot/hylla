@@ -57,7 +57,7 @@ Library.prototype.generate = function(entry) {
   var root_key = root_aut + root_dat + root_let;
   var trial_key = root_key;
   var trials = 1;
-  while(this.entry(entry)) {
+  while(this.entry(trial_key)) {
     trials = trials + 1;
     trial_key = root_key + String(trials);
   }
