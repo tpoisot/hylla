@@ -12,6 +12,9 @@ describe('Library', function() {
       var lib = new shelf.Library(library);
       chai.assert.equal(library, lib.path);
     });
+
+    it('should fix the file name if the filename and the key are mismatched');
+
   });
 
   describe('writing', function() {

@@ -26,6 +26,7 @@ function Library(library) {
   this.records = this.path + "/records/"
   // TODO files
   // TODO check that all of these paths are directories
+  // TODO create paths if not exist
 
   // Read entries
   this.entries = {};
@@ -37,6 +38,7 @@ Library.prototype.read = function(id) {
   var files = fs.readdirSync(this.records);
   for (var i = 0; i < files.length; i++) {
     var entry = require(this.records + files[i]);
+    // TODO check id and file name
     this.entries[entry.id] = entry;
   }
 }
