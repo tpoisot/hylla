@@ -1,5 +1,14 @@
 var diacritics = require('diacritics');
 
+/**
+ Return a cleaned version of a string
+
+ Specifically, this function will remove all punctuation signs and numbers. It
+ will then remove all the diacritics, so that the end result is a string with
+ only `a-ZA-Z` and whitespaces.
+
+ @param {String} word The string to be cleaned
+ */
 function cleanWord(word) {
   // Remove the punctuation
   word = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/[0-9]/g, "");
@@ -8,6 +17,14 @@ function cleanWord(word) {
   return word;
 }
 
+/**
+ Return a cleaned version of a name
+
+ Specifically, this function will return the family name for persons, and the
+ literal names in all other cases. The names will be cleaned using {@link cleanWord}.
+
+ @param {Object} name The name object
+ */
 function formatName(name) {
   if (name.literal) {
     fname = name.literal;
@@ -86,7 +103,10 @@ function Yr(entry) {
 }
 
 
-
+/**
+ Return a citation in the authorYear formatName
+ @param {Object} entry the entry in the citeproc format
+*/
 function authorYear(entry) {
   return author(entry) + Year(entry);
 }
