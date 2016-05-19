@@ -18,9 +18,15 @@ function Library(library) {
 
   // Build the path for records, files, and file db
   this.records = this.path + "/records/"
-  // TODO files
-  // TODO check that all of these paths are directories
-  // TODO create paths if not exist
+  fs.access(this.records, fs.F_OK, (err) => {if(err) fs.mkdir(this.records)});
+
+  this.files = this.path + "/files/";
+  fs.access(this.files, fs.F_OK, (err) => {if(err) fs.mkdir(this.files)});
+
+  this.pdf = this.path + "/files.json";
+  fs.access(this.pdf, fs.F_OK, (err) => {if(err) fs.closeSync(fs.openSync(this.pdf, 'w'))});
+
+  // TODO: read files pdf as an object
 
   // Read entries
   this.entries = [];
