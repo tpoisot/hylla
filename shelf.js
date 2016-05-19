@@ -5,6 +5,7 @@ var path = require('path');
 var entries = require('./entries.js');
 var keys = require('./keys.js');
 var doi = require('./doi.js');
+var pdf = require('./icanhazpdf.js');
 
 function Library(library) {
 
@@ -103,3 +104,4 @@ Library.prototype.new = function(infos) {
 module.exports.Library = Library;
 module.exports.keys = keys;
 module.exports.doi = doi;
+module.exports.pdf = pdf;
