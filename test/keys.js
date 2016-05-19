@@ -1,7 +1,3 @@
-// TODO DOI test
-// var dna = "10.1038/171737a0";
-// var dna_ref = get_json_from_doi(dna);
-
 describe('Keys', function() {
 
   describe('names', function() {
