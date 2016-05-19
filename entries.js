@@ -14,6 +14,14 @@ Entry.prototype.id = function() {
   }
 }
 
+Entry.prototype.doi = function() {
+  if(this.content.doi) {
+    return this.content.doi;
+  } else {
+    return undefined;
+  }
+}
+
 Entry.prototype.json = function() {
   return JSON.stringify(this.content, null, 2);
 }
