@@ -31,9 +31,26 @@ Library.prototype.read = function(id) {
   var files = fs.readdirSync(this.records);
   this.entries = [];
   for (var i = 0; i < files.length; i++) {
-    var entry = require(this.records + files[i]);
-    // TODO check id and file name
-    this.entries.push(new entries.Entry(entry, this));
+    // This is the file we read FROM
+    var load_from = this.records + files[i];
+    var entry = require(load_from);
+    // We convert this into an object
+    var entry_object = new entries.Entry(entry, this);
+    // If there is no id present, we generate one
+    if(entry_object.content.id === undefined) {
+      entry_object.content.id = this.generate(entry_object.content);
+    }
+    // Knowing the id, this is the filename the reference should have
+    var load_expect = this.records + entry_object.id() + ".json";
+    // If there is a mismatch, we fix it
+    if(load_expect != load_from) {
+      // by removing the old file
+      fs.unlinkSync(load_from);
+      // and writing the correct one
+      fs.writeFile(load_expect, entry_object.json(), 'utf-8', function(e) { console.log(e);});
+    }
+    // Then we add the entry to the library
+    this.entries.push(entry_object);
   }
 }
 
@@ -65,7 +82,7 @@ Library.prototype.generate = function(entry) {
 }
 
 Library.prototype.write = function() {
-  fs.writeFile(this.path + "/default.json", JSON.stringify(this.entries, null, 2), 'utf-8', function(err) {
+  fs.writeFile(this.path + "/default.json", JSON.stringify(this.entries.map(function(e) {return e.content}), null, 2), 'utf-8', function(err) {
     console.log(err);
   });
 };
