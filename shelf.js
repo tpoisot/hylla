@@ -34,6 +34,7 @@ Library.prototype.read = function(id) {
   for (var i = 0; i < files.length; i++) {
     // This is the file we read FROM
     var load_from = this.records + files[i];
+    // We can `require` JSON objects
     var entry = require(load_from);
     // We convert this into an object
     var entry_object = new entries.Entry(entry, this);
