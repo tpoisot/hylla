@@ -15,6 +15,7 @@ describe('Entries', function() {
   });
 
   describe('adding references', function() {
+    
     it('should create a new key', function() {
       var doi = "10.1111/ecog.01748";
       var ref = shelf.doi.from_doi(doi);
