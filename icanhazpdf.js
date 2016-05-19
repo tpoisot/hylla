@@ -12,7 +12,7 @@ match_doi_to_publisher = function(doi) {
   // PNAS
   if(/pnas/.test(doi)) {return 'pnas'};
   // PeerJ
-  if(/peerj/.test(doi)) {return 'pnas'};
+  if(/peerj/.test(doi)) {return 'peerj'};
   // Plos
   if(/10\.1371\/journal\.p(pat|one|med|gen|ntd|bio|cbi)\./.test(doi)) {return 'plos'};
   // If not, return undefined
@@ -20,7 +20,7 @@ match_doi_to_publisher = function(doi) {
 }
 
 get_pdf = function(doi) {
-
+  return undefined;
 }
 
 module.exports.match = match_doi_to_publisher;
