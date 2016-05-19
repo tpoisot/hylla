@@ -15,6 +15,7 @@ before(function() {
 });
 
 after(function() {
+  fs.unlinkSync(lib.path + "/default.json"); // NOTE remove the test file
   var dir = fs.readdirSync(lib.records);
   for (var i = 0; i < dir.length; i++) {
     var to_remove = lib.records + "/" + dir[i];

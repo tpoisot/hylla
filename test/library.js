@@ -24,7 +24,6 @@ describe('Library', function() {
       var lib = new shelf.Library(library);
       lib.write();
       chai.assert.isFile(library + "/default.json");
-      fs.unlinkSync(library + "/default.json"); // NOTE remove the test file
     });
 
   });
