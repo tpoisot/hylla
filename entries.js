@@ -15,8 +15,8 @@ Entry.prototype.id = function() {
 }
 
 Entry.prototype.doi = function() {
-  if(this.content.doi) {
-    return this.content.doi;
+  if(this.content.DOI) {
+    return this.content.DOI;
   } else {
     return undefined;
   }
