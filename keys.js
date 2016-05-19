@@ -34,7 +34,6 @@ function formatName(name) {
   return cleanWord(fname).replace(/\s/g, '');
 }
 
-
 function Author(entry) {
   if (entry.author) {
     var A = entry.author[0];

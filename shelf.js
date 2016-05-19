@@ -82,10 +82,20 @@ Library.prototype.generate = function(entry) {
   return trial_key;
 }
 
-Library.prototype.write = function() {
-  fs.writeFile(this.path + "/default.json", JSON.stringify(this.entries.map(function(e) {return e.content}), null, 2), 'utf-8', function(err) {
-    console.log(err);
-  });
+Library.prototype.write = function(file, keys) {
+  // File is used to determine where to write the library
+  if(file === undefined) {
+    var file = this.path + "/default.json";
+  }
+  // Keys is an optional array with the keys to extract
+  if(keys === undefined) {
+    // If not defined, we return all the entries
+    keys = this.keys();
+  }
+  // The final step is to filter the correct entries, then map a function to return the content only
+  var entries = this.entries.filter(function(e,i,a){return e.id() in keys}).map(function(e) {return e.content});
+  // Finally, we write the entries in the output file
+  fs.writeFile(file, JSON.stringify(entries, null, 2), 'utf-8', function(err) { console.log(err) });
 };
 
 Library.prototype.new = function(infos) {
