@@ -23,10 +23,14 @@ function Library(library) {
   this.files = this.path + "/files/";
   fs.access(this.files, fs.F_OK, (err) => {if(err) fs.mkdir(this.files)});
 
-  this.pdf = this.path + "/files.json";
-  fs.access(this.pdf, fs.F_OK, (err) => {if(err) fs.closeSync(fs.openSync(this.pdf, 'w'))});
-
   // TODO: read files pdf as an object
+  /* NOTE:
+  About files...
+  They will be named files/key.1.pdf files/key.2.pdf
+  So when the key change, we can just look for matching filenames, and replace
+  This should remove the need to store infos in either the json file itself,
+  or an external json file
+  */
 
   // Read entries
   this.entries = [];

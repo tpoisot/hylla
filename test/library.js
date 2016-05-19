@@ -3,7 +3,6 @@ describe('Library', function() {
   describe('loading', function() {
 
     it('should create the appropriate folders');
-    it('should create the files.json file');
 
     it('should create a default path if none is given', function() {
       var lib = new shelf.Library();
