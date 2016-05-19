@@ -21,7 +21,10 @@ describe('Keys', function() {
     });
 
     it('should return the editor name if there are no authors');
-    it('should work with short author names (less than 2 valid chars)');
+    it('should work with short author names (less than 2 valid chars)', function () {
+      var lib = new shelf.Library(path.resolve("./test/data"));
+      chai.assert.equal(lib.entry("liu09cdi").id(), "liu09cdi");
+    });
   });
 
   describe('date', function() {

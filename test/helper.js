@@ -10,7 +10,7 @@ before(function() {
     return lib.new(info);
   };
   // Add some informations
-  var DOIs = ["10.1890/09-1328.1", "10.1017/CBO9781107415324"];
+  var DOIs = ["10.1890/09-1328.1", "10.1017/CBO9781107415324", "10.1109/WI-IAT.2009.15"];
   DOIs.map(add_from_doi);
 });
 
