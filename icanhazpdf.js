@@ -4,17 +4,17 @@ var fs = require('fs');
 match_doi_to_publisher = function(doi) {
   // TODO: Read from an object?
   // Elsevier
-  if(/10\.1111/.test(doi)) {return 'wiley'};
+  if(/10\.1111/.test(doi)) {return 'wiley'}
   // Elsevier
-  if(/10\.1016/.test(doi)) {return 'elsevier'};
+  if(/10\.1016/.test(doi)) {return 'elsevier'}
   // Royal Society
-  if(/10\.1098/.test(doi)) {return 'royal_society'};
+  if(/10\.1098/.test(doi)) {return 'royal_society'}
   // PNAS
-  if(/pnas/.test(doi)) {return 'pnas'};
+  if(/pnas/.test(doi)) {return 'pnas'}
   // PeerJ
-  if(/peerj/.test(doi)) {return 'peerj'};
+  if(/peerj/.test(doi)) {return 'peerj'}
   // Plos
-  if(/10\.1371\/journal\.p(pat|one|med|gen|ntd|bio|cbi)\./.test(doi)) {return 'plos'};
+  if(/10\.1371\/journal\.p(pat|one|med|gen|ntd|bio|cbi)\./.test(doi)) {return 'plos'}
   // If not, return undefined
   return undefined;
 }
