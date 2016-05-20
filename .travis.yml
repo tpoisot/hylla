@@ -5,15 +5,7 @@ before_script:
   - npm install chai-fs
   - mkdir -p test/data/{files,records}
 node_js:
+  - "6"
   - "5"
-  - "5.1"
   - "4"
-  - "4.2"
-  - "4.1"
-  - "4.0"
-  - "0.12"
-  - "0.11"
-  - "0.10"
-  - "0.8"
-  - "0.6"
   - "iojs"
