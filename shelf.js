@@ -55,7 +55,7 @@ Library.prototype.read = function(id) {
     // Knowing the id, this is the filename the reference should have
     var load_expect = this.records + entry_object.id() + ".json";
     // If there is a mismatch, we fix it
-    if(load_expect != load_from) {
+    if(load_expect !== load_from) {
       // by removing the old file
       fs.unlinkSync(load_from);
       // and writing the correct one
@@ -71,7 +71,7 @@ Library.prototype.keys = function() {
 }
 
 Library.prototype.entry = function(id) {
-  var ok = this.entries.filter(function(element, index, array) {return element.id() == id});
+  var ok = this.entries.filter(function(element, index, array) {return element.id() === id});
   if(ok.length == 1) {
     return ok[0]
   } else {
@@ -96,7 +96,7 @@ Library.prototype.generate = function(entry) {
 Library.prototype.write = function(file, keys) {
   // File is used to determine where to write the library
   if(file === undefined) {
-    var file = this.path + "/default.json";
+    file = this.path + "/default.json";
   }
   // Keys is an optional array with the keys to extract
   if(keys === undefined) {
