@@ -18,10 +18,10 @@ function Library(library) {
 
   // Build the path for records, files, and file db
   this.records = this.path + "/records/"
-  fs.access(this.records, fs.F_OK, (err) => {if(err) fs.mkdir(this.records)});
+  fs.access(this.records, fs.F_OK, (err) => {if(err) fs.mkdirSync(this.records)});
 
   this.files = this.path + "/files/";
-  fs.access(this.files, fs.F_OK, (err) => {if(err) fs.mkdir(this.files)});
+  fs.access(this.files, fs.F_OK, (err) => {if(err) fs.mkdirSync(this.files)});
 
   // TODO: read files pdf as an object
   /* NOTE:
