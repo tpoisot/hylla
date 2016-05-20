@@ -36,11 +36,12 @@ function formatName(name) {
 }
 
 function Author(entry) {
+  var A = {};
   if (entry.author) {
-    var A = entry.author[0];
+    A = entry.author[0];
     return formatName(A);
   } else if (entry.editor) {
-    var A = entry.editor[0];
+    A = entry.editor[0];
     return formatName(A);
   } else {
     return "Anonymous";
