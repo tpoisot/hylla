@@ -3,7 +3,7 @@
 `shelf` is a Node.js library to manage bibliographic references in the
 citeproc-json format. It is currently very bare bones.
 
-[![Code climate](https://img.shields.io/codeclimate/github/kabisaict/flow.svg)](https://codeclimate.com/github/tpoisot/shelf)
+[![Code climate](https://img.shields.io/codeclimate/github/tpoisot/shelf.svg)](https://codeclimate.com/github/tpoisot/shelf)
 [![Travis](https://img.shields.io/travis/tpoisot/shelf.svg)](https://travis-ci.org/tpoisot/shelf)
 [![Coveralls](https://img.shields.io/coveralls/tpoisot/shelf.svg)](https://coveralls.io/github/tpoisot/shelf)
 
