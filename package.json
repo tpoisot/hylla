@@ -13,7 +13,7 @@
     "url": "git://github.com/tpoisot/shelf.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
     "crypto": "0.0.3",
