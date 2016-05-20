@@ -56,7 +56,7 @@ function title_first_letters(entry) {
 }
 
 function Year(entry) {
-  dates = ['created', 'issued', 'deposited', 'indexed', 'accessed'];
+  dates = ['issued', 'created', 'deposited', 'indexed', 'accessed'];
   for (i in dates) {
     var date_field = dates[i];
     if(date_field in entry) {
@@ -65,7 +65,9 @@ function Year(entry) {
         return String(date.getFullYear());
       } else {
         var parts = entry[date_field]['date-parts'];
-        return String(parts[0][0]);
+        if(parts[0] != null) {
+          return String(parts[0][0]);  
+        }
       }
     }
   }
