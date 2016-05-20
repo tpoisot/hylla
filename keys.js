@@ -56,7 +56,7 @@ function title_first_letters(entry) {
 }
 
 function Year(entry) {
-  dates = ['issued', 'deposited', 'indexed', 'accessed'];
+  dates = ['created', 'issued', 'deposited', 'indexed', 'accessed'];
   for (i in dates) {
     var date_field = dates[i];
     if(date_field in entry) {

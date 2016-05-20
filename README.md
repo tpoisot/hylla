@@ -38,3 +38,6 @@ Get the infos for a reference given its key:
 ~~~ javascript
 console.log(lib.entry('unique_ref_id'));
 ~~~
+
+Though of course you should do absolutely none of these things this way, and
+write wrappers instead.
