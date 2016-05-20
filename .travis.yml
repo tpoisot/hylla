@@ -7,5 +7,3 @@ before_script:
 node_js:
   - "6"
   - "5"
-  - "4"
-  - "iojs"
