@@ -3,6 +3,7 @@ before_script:
   - npm install mocha
   - npm install chai
   - npm install chai-fs
+  - mkdir -p test/data/{files,records}
 node_js:
   - "5"
   - "5.1"
