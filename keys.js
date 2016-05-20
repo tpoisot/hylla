@@ -12,7 +12,7 @@ var keyword = require("keyword-extractor");
  */
 function cleanWord(word) {
   // Remove the punctuation
-  word = word.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/[0-9]/g, "");
+  word = word.replace(/[’‘.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/[0-9]/g, "");
   // Remove the diacritics
   word = diacritics.remove(word);
   return word;
