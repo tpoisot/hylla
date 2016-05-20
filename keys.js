@@ -66,7 +66,7 @@ function Year(entry) {
       } else {
         var parts = entry[date_field]['date-parts'];
         if(parts[0] != null) {
-          return String(parts[0][0]);  
+          return String(parts[0][0]);
         }
       }
     }
