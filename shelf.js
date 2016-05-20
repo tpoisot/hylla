@@ -122,6 +122,11 @@ Library.prototype.new = function(infos) {
   return entry.id();
 }
 
+Library.prototype.attach = function(id, file) {
+  var entry = this.entry(id);
+  fs.renameSync(file, this.files + id + ".pdf", function(e){if(e)console.log(e);});
+}
+
 module.exports.Library = Library;
 module.exports.keys = keys;
 module.exports.doi = doi;
