@@ -127,6 +127,12 @@ Library.prototype.attach = function(id, file) {
   fs.renameSync(file, this.files + id + ".pdf", function(e){if(e)console.log(e);});
 }
 
+Library.prototype.icanhazpdf = function(id) {
+  var entry = this.entry(id);
+  var file = pdf.get(entry.doi());
+  this.attach(entry.id(), file);
+}
+
 module.exports.Library = Library;
 module.exports.keys = keys;
 module.exports.doi = doi;

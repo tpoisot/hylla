@@ -21,4 +21,10 @@ after(function() {
     var to_remove = lib.records + "/" + dir[i];
     fs.unlink(to_remove, function(err) {console.log(err)});
   }
+
+  var dir = fs.readdirSync(lib.files);
+  for (var i = 0; i < dir.length; i++) {
+    var to_remove = lib.files + "/" + dir[i];
+    fs.unlink(to_remove, function(err) {console.log(err)});
+  }
 });
