@@ -15,14 +15,14 @@ describe('Entries', function() {
   });
 
   describe('adding references', function() {
-    
+
     it('should create a new key', function() {
       var doi = "10.1111/ecog.01748";
       var ref = shelf.doi.from_doi(doi);
       var lib = new shelf.Library(path.resolve("./test/data"));
       var newref = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gray15tat');
+      chai.assert.equal(newref, 'gray15tts');
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
     });
@@ -34,8 +34,8 @@ describe('Entries', function() {
       var newref = lib.new(ref);
       var newref2 = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gray15tat');
-      chai.assert.equal(newref2, 'gray15tat2');
+      chai.assert.equal(newref, 'gray15tts');
+      chai.assert.equal(newref2, 'gray15tts2');
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
       fs.unlinkSync(lib.records + "/" + newref2 + ".json");
@@ -47,7 +47,7 @@ describe('Entries', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
       var newref = lib.new(ref);
       // First we check the key
-      chai.assert.equal(newref, 'gray15tat');
+      chai.assert.equal(newref, 'gray15tts');
       chai.assert.isFile(lib.records + "/" + newref + ".json");
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");

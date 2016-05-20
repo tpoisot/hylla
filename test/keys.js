@@ -8,7 +8,7 @@ describe('Keys', function() {
 
     it('should return the institution name if the first author is an institution', function() {
       var lib = new shelf.Library(path.resolve("./test/data"));
-      chai.assert.equal(shelf.keys.Author(lib.entry("inte09cct").content), "IntergovernmentalPanelonClimateChange");
+      chai.assert.equal(shelf.keys.Author(lib.entry("inte09ccp").content), "IntergovernmentalPanelonClimateChange");
     });
 
     it('should remove diacritics', function() {
@@ -19,7 +19,7 @@ describe('Keys', function() {
     it('should return the editor name if there are no authors');
     it('should work with short author names (less than 2 valid chars)', function () {
       var lib = new shelf.Library(path.resolve("./test/data"));
-      chai.assert.equal(lib.entry("liu09cdi").id(), "liu09cdi");
+      chai.assert.equal(lib.entry("liu09cdl").id(), "liu09cdl");
     });
   });
 
