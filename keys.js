@@ -68,8 +68,8 @@ function Year(entry) {
         return String(date.getFullYear());
       } else {
         var parts = entry[date_field]['date-parts'];
-        if(parts) {
-          if(parts[0] != null) {
+        if(parts) {
+          if(parts[0] !== null) {
             return String(parts[0][0]);
           }
         }
