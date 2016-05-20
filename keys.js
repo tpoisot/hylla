@@ -1,4 +1,5 @@
 var diacritics = require('diacritics');
+var keyword = require("keyword-extractor");
 
 /**
  Return a cleaned version of a string
@@ -49,7 +50,9 @@ function Author(entry) {
 function title_first_letters(entry) {
   if(entry.title) {
     var title = cleanWord(entry.title);
-    return title.split(" ").map(function(x){return x[0]}).join('').toLowerCase().substr(0, 3);
+    // Extract keywords
+    var keywords = keyword.extract(title, {language: "english", remove_duplicates: "false"});
+    return keywords.map(function(x){return x[0]}).join('').toLowerCase().substr(0, 3);
   } else {
     return "???";
   }
