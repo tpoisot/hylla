@@ -106,7 +106,7 @@ Library.prototype.write = function(file, keys) {
   // The final step is to filter the correct entries, then map a function to return the content only
   var entries = this.entries.filter(function(e,i,a){return keys.indexOf(e.id()) > -1}).map(function(e) {return e.content});
   // Finally, we write the entries in the output file
-  fs.writeFile(file, JSON.stringify(entries, null, 2), 'utf-8', function(err) { if(err) console.log(err) });
+  fs.writeFileSync(file, JSON.stringify(entries, null, 2), 'utf-8', function(err) { if(err) console.log(err) });
 };
 
 Library.prototype.new = function(infos) {

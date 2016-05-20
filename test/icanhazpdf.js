@@ -16,4 +16,14 @@ describe('PDF finder', function() {
 
   });
 
+  describe('download module', function() {
+
+    it('should work with plos journals', function() {
+      shelf.pdf.get("10.1371/journal.pcbi.0030102");
+      chai.assert.isFile("10fizz1371buzzjournalfizzpcbifizz0030102.pdf");
+      fs.unlinkSync("10fizz1371buzzjournalfizzpcbifizz0030102.pdf");
+    });
+
+  });
+
 });
