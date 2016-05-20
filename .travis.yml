@@ -4,6 +4,8 @@ before_script:
   - npm install chai
   - npm install chai-fs
   - mkdir -p test/data/{files,records}
+after_script:
+  - ./node_modules/mocha/bin/mocha -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
 node_js:
   - "6"
   - "5"
