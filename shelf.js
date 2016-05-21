@@ -138,16 +138,20 @@ Library.prototype.new = function(infos) {
 
 Library.prototype.attach = function(id, file) {
   var entry = this.entry(id);
+  // TODO: Only if there is a valid entry
+  var moveFileTo = this.files + id + ".pdf";
   fs.stat(file, function(err, stats) {
     if (err) {
       console.log(err);
     } else {
-      fs.renameSync(file, this.files + id + ".pdf", function(e) {
-        if (e) console.log(e);
+      fs.renameSync(file, moveFileTo, function(e) {
+        if (e) {
+          console.log(e);
+        }
       });
     }
-  })
-}
+  });
+};
 
 Library.prototype.icanhazpdf = function(id) {
   var entry = this.entry(id);
