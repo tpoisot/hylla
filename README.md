@@ -33,7 +33,7 @@ Add references from a DOI:
 
 ~~~ javascript
 var dna = "10.1038/171737a0";
-var dna_ref = shelf.doi.from_doi(dna);
+var dna_ref = shelf.doi.refFromDoi(dna);
 var newref = lib.new(dna_ref);
 ~~~
 

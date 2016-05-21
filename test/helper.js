@@ -11,13 +11,13 @@ assert_file = function(filename) {
 
 before(function() {
   // Directly add from DOI
-  function add_from_doi(d) {
-    var info = shelf.doi.from_doi(d);
+  function add_refFromDoi(d) {
+    var info = shelf.doi.refFromDoi(d);
     return lib.new(info);
   };
   // Add some informations
   var DOIs = ["10.1890/09-1328.1", "10.1017/CBO9781107415324", "10.1109/WI-IAT.2009.15"];
-  DOIs.map(add_from_doi);
+  DOIs.map(add_refFromDoi);
 });
 
 after(function() {

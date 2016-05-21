@@ -27,7 +27,7 @@
 //     it('should work from the library', function() {
 //       var lib = new shelf.Library(path.resolve("./test/data"));
 //       var doi = "10.1371/journal.pcbi.0030102";
-//       var ref = shelf.doi.from_doi(doi);
+//       var ref = shelf.doi.refFromDoi(doi);
 //       var newref = lib.new(ref);
 //       lib.icanhazpdf(newref);
 //     });
