@@ -5,6 +5,8 @@ before_script:
   - npm install -g istanbul
   - npm install
   - mkdir -p test/data/{files,records}
+after_script:
+  -  cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
 node_js:
   - "6"
   - "5"
