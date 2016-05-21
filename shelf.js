@@ -2,10 +2,10 @@ var fs = require('fs');
 var os = require('os');
 var path = require('path');
 
-var entries = require('./entries.js');
-var keys = require('./keys.js');
-var doi = require('./doi.js');
-var pdf = require('./icanhazpdf.js');
+var entries = require('./lib/entries.js');
+var keys = require('./lib/keys.js');
+var doi = require('./lib/doi.js');
+var pdf = require('./lib/icanhazpdf.js');
 
 function Library(library) {
 
