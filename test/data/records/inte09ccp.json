@@ -1,0 +1,80 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2016,
+        1,
+        5
+      ]
+    ],
+    "date-time": "2016-01-05T12:57:53Z",
+    "timestamp": 1451998673342
+  },
+  "reference-count": 0,
+  "publisher": "Cambridge University Press (CUP)",
+  "published-print": {
+    "date-parts": [
+      [
+        2014
+      ]
+    ]
+  },
+  "DOI": "10.1017/cbo9781107415324",
+  "type": "book",
+  "created": {
+    "date-parts": [
+      [
+        2014,
+        6,
+        9
+      ]
+    ],
+    "date-time": "2014-06-09T04:30:15Z",
+    "timestamp": 1402288215000
+  },
+  "source": "CrossRef",
+  "title": "Climate Change 2013 - The Physical Science Basis",
+  "prefix": "http://id.crossref.org/prefix/10.1017",
+  "member": "http://id.crossref.org/member/56",
+  "published-online": {
+    "date-parts": [
+      [
+        2009
+      ]
+    ]
+  },
+  "container-title": null,
+  "deposited": {
+    "date-parts": [
+      [
+        2016,
+        1,
+        2
+      ]
+    ],
+    "date-time": "2016-01-02T17:05:14Z",
+    "timestamp": 1451754314000
+  },
+  "score": 1,
+  "subtitle": [
+    "Working Group I Contribution to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change"
+  ],
+  "editor": [
+    {
+      "affiliation": [],
+      "family": "Intergovernmental Panel on Climate Change"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2009
+      ]
+    ]
+  },
+  "ISBN": [
+    "http://id.crossref.org/isbn/9781107415324"
+  ],
+  "URL": "http://dx.doi.org/10.1017/CBO9781107415324",
+  "id": "inte09ccp"
+}
