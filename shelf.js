@@ -22,15 +22,15 @@ function Library(library) {
   // Default path if none given
   if (library === undefined) {
     var home = process.env.HOME || process.env.USERPROFILE;
-    library = home + "/.pandoc";
+    library = home + '/.pandoc';
   }
   this.path = path.resolve(library);
 
   // Build the path for records and files
-  this.records = this.path + "/records/";
+  this.records = this.path + '/records/';
   makeFolderIfNotExist(this.records);
 
-  this.files = this.path + "/files/";
+  this.files = this.path + '/files/';
   makeFolderIfNotExist(this.files);
 
   // Read entries
@@ -53,7 +53,7 @@ Library.prototype.read = function() {
       entryObject.content.id = this.generate(entryObject.content);
     }
     // Knowing the id, this is the filename the reference should have
-    var loadExpect = this.records + entryObject.id() + ".json";
+    var loadExpect = this.records + entryObject.id() + '.json ';
     // If there is a mismatch, we fix it
     if (loadExpect !== loadFrom) {
       // by removing the old file
@@ -102,7 +102,7 @@ Library.prototype.generate = function(entry) {
 Library.prototype.write = function(file, keys) {
   // File is used to determine where to write the library
   if (file === undefined) {
-    file = this.path + "/default.json";
+    file = this.path + '/default.json';
   }
   // Keys is an optional array with the keys to extract
   if (keys === undefined) {
@@ -113,12 +113,12 @@ Library.prototype.write = function(file, keys) {
   var entries = this.entries.filter(function(e, i, a) {
     return keys.indexOf(e.id()) > -1;
   }).map(function(e) {
-    return e.content
+    return e.content;
   });
   // Finally, we write the entries in the output file
   fs.writeFileSync(file, JSON.stringify(entries, null, 2), 'utf-8', function(
     err) {
-    if (err) console.log(err)
+    if (err) console.log(err);
   });
 };
 
@@ -126,7 +126,7 @@ Library.prototype.new = function(infos) {
   var entry = new entries.Entry(infos);
   entry.content.id = this.generate(entry.content);
   // The reference is written to file
-  fs.writeFileSync(this.records + "/" + entry.id() + ".json", entry.json(),
+  fs.writeFileSync(this.records + '/' + entry.id() + '.json', entry.json(),
     'utf-8',
     function(err) {
       console.log(err);
@@ -135,23 +135,26 @@ Library.prototype.new = function(infos) {
   this.read(); // IDEA: maybe push instead of reloading?
   // NOTE the id of the new reference is returned because it might be useful
   return entry.id();
-}
+};
 
 Library.prototype.attach = function(id, file) {
   var entry = this.entry(id);
-  // TODO: Only if there is a valid entry
-  var moveFileTo = this.files + id + ".pdf";
-  fs.stat(file, function(err, stats) {
-    if (err) {
-      console.log(err);
-    } else {
-      fs.renameSync(file, moveFileTo, function(e) {
-        if (e) {
-          console.log(e);
-        }
-      });
-    }
-  });
+  if (entry) {
+    var moveFileTo = this.files + id + '.pdf';
+    fs.stat(file, function(err, stats) {
+      if (err) {
+        console.log(err);
+      } else {
+        fs.renameSync(file, moveFileTo, function(e) {
+          if (e) {
+            console.log(e);
+          }
+        });
+      }
+    });
+  } else {
+    console.log('No entry with ID ' + id);
+  }
 };
 
 Library.prototype.icanhazpdf = function(id) {
