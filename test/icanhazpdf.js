@@ -36,6 +36,16 @@ describe('PDF finder', function() {
       fs.unlinkSync('10fizz1098buzzrspbfizz2009fizz2139.pdf');
     });
 
+    it('should work with wiley journals', function() {
+      shelf.pdf.get('10.1111/j.2041-210X.2010.00032.x');
+      assertIsFile(
+        '10fizz1111buzzjfizz2041-210Xfizz2010fizz00032fizzx.pdf');
+      fs.unlinkSync(
+        '10fizz1111buzzjfizz2041-210Xfizz2010fizz00032fizzx.pdf');
+    });
+
+
+
     it('should work from the library', function() {
       var lib = new shelf.Library(path.resolve('./test/data'));
       var doi = '10.1371/journal.pcbi.0030102';
