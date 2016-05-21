@@ -32,5 +32,6 @@
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.2.0"
-  }
+  },
+  "tonicExampleFilename": "example.js"
 }
