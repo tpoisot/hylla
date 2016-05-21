@@ -86,9 +86,9 @@ Library.prototype.entry = function(id) {
 };
 
 Library.prototype.generate = function(entry) {
-  var rootAut = keys.Author(entry).toLowerCase().substr(0, 4);
-  var rootDat = keys.Yr(entry);
-  var rootLet = keys.title_first_letters(entry);
+  var rootAut = keys.nameOfFirstAuthor(entry).toLowerCase().substr(0, 4);
+  var rootDat = keys.lastDigitsOfYear(entry);
+  var rootLet = keys.firstLettersOfTitle(entry);
   var rootKey = rootAut + rootDat + rootLet;
   var trialKey = rootKey;
   var trials = 1;
