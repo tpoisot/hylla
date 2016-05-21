@@ -18,10 +18,14 @@ function Library(library) {
 
   // Build the path for records and files
   this.records = this.path + "/records/"
-  fs.access(this.records, fs.F_OK, (err) => {if(err) fs.mkdirSync(this.records)});
+  fs.access(this.records, fs.F_OK, (err) => {
+    if (err) fs.mkdirSync(this.records)
+  });
 
   this.files = this.path + "/files/";
-  fs.access(this.files, fs.F_OK, (err) => {if(err) fs.mkdirSync(this.files)});
+  fs.access(this.files, fs.F_OK, (err) => {
+    if (err) fs.mkdirSync(this.files)
+  });
 
   // Read entries
   this.entries = [];
@@ -40,17 +44,19 @@ Library.prototype.read = function(id) {
     // We convert this into an object
     var entry_object = new entries.Entry(entry, this);
     // If there is no id present, we generate one
-    if(entry_object.content.id === undefined) {
+    if (entry_object.content.id === undefined) {
       entry_object.content.id = this.generate(entry_object.content);
     }
     // Knowing the id, this is the filename the reference should have
     var load_expect = this.records + entry_object.id() + ".json";
     // If there is a mismatch, we fix it
-    if(load_expect !== load_from) {
+    if (load_expect !== load_from) {
       // by removing the old file
       fs.unlinkSync(load_from);
       // and writing the correct one
-      fs.writeFile(load_expect, entry_object.json(), 'utf-8', function(e) { console.log(e);});
+      fs.writeFile(load_expect, entry_object.json(), 'utf-8', function(e) {
+        console.log(e);
+      });
     }
     // Then we add the entry to the library
     this.entries.push(entry_object);
@@ -58,12 +64,16 @@ Library.prototype.read = function(id) {
 }
 
 Library.prototype.keys = function() {
-  return this.entries.map(function(element, index, array) {return element.id()});
+  return this.entries.map(function(element, index, array) {
+    return element.id()
+  });
 }
 
 Library.prototype.entry = function(id) {
-  var ok = this.entries.filter(function(element, index, array) {return element.id() === id});
-  if(ok.length == 1) {
+  var ok = this.entries.filter(function(element, index, array) {
+    return element.id() === id
+  });
+  if (ok.length == 1) {
     return ok[0]
   } else {
     return undefined;
@@ -71,13 +81,13 @@ Library.prototype.entry = function(id) {
 }
 
 Library.prototype.generate = function(entry) {
-  var root_aut = keys.Author(entry).toLowerCase().substr(0,4);
+  var root_aut = keys.Author(entry).toLowerCase().substr(0, 4);
   var root_dat = keys.Yr(entry);
   var root_let = keys.title_first_letters(entry);
   var root_key = root_aut + root_dat + root_let;
   var trial_key = root_key;
   var trials = 1;
-  while(this.entry(trial_key)) {
+  while (this.entry(trial_key)) {
     trials = trials + 1;
     trial_key = root_key + String(trials);
   }
@@ -86,25 +96,34 @@ Library.prototype.generate = function(entry) {
 
 Library.prototype.write = function(file, keys) {
   // File is used to determine where to write the library
-  if(file === undefined) {
+  if (file === undefined) {
     file = this.path + "/default.json";
   }
   // Keys is an optional array with the keys to extract
-  if(keys === undefined) {
+  if (keys === undefined) {
     // If not defined, we return all the entries
     keys = this.keys();
   }
   // The final step is to filter the correct entries, then map a function to return the content only
-  var entries = this.entries.filter(function(e,i,a){return keys.indexOf(e.id()) > -1}).map(function(e) {return e.content});
+  var entries = this.entries.filter(function(e, i, a) {
+    return keys.indexOf(e.id()) > -1
+  }).map(function(e) {
+    return e.content
+  });
   // Finally, we write the entries in the output file
-  fs.writeFileSync(file, JSON.stringify(entries, null, 2), 'utf-8', function(err) { if(err) console.log(err) });
+  fs.writeFileSync(file, JSON.stringify(entries, null, 2), 'utf-8', function(
+    err) {
+    if (err) console.log(err)
+  });
 };
 
 Library.prototype.new = function(infos) {
   var entry = new entries.Entry(infos);
   entry.content.id = this.generate(entry.content);
   // The reference is written to file
-  fs.writeFileSync(this.records + "/" + entry.id() + ".json", entry.json(), 'utf-8', function(err) {
+  fs.writeFileSync(this.records + "/" + entry.id() + ".json", entry.json(),
+    'utf-8',
+    function(err) {
       console.log(err);
     });
   // The library is reloaded immediately after
@@ -116,10 +135,12 @@ Library.prototype.new = function(infos) {
 Library.prototype.attach = function(id, file) {
   var entry = this.entry(id);
   fs.stat(file, function(err, stats) {
-    if(err) {
+    if (err) {
       console.log(err);
     } else {
-      fs.renameSync(file, this.files + id + ".pdf", function(e){if(e)console.log(e);});
+      fs.renameSync(file, this.files + id + ".pdf", function(e) {
+        if (e) console.log(e);
+      });
     }
   })
 }
