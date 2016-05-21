@@ -12,6 +12,14 @@ describe('PDF finder', function() {
       chai.assert.equal(shelf.pdf.match(
         '10.1111/j.1461-0248.2010.01572.x'), 'wiley');
     });
+    it('should recognize royal society', function() {
+      chai.assert.equal(shelf.pdf.match(
+        '10.1098/rspb.2009.2139'), 'royal_society');
+    });
+    it('should recognize peerj', function() {
+      chai.assert.equal(shelf.pdf.match('10.7717/peerj.1974'),
+        'peerj');
+    });
   });
 
   describe('download module', function() {
