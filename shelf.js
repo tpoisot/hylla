@@ -17,27 +17,41 @@ function makeFolderIfNotExist(folder) {
   });
 }
 
+// # Library class
+/** Library class
+@param {String} library The path to the library
+ */
 function Library(library) {
-
-  // Default path if none given
+  // If no path is given, we will assume that the informations are stored in
+  // `pandoc`'s default location, which is supposed to be the `.pandoc` folder
+  // in the user's home / profile folder.
   if (library === undefined) {
+    // This line should make things reasonably cross-platform
     var home = process.env.HOME || process.env.USERPROFILE;
     library = home + '/.pandoc';
   }
   this.path = path.resolve(library);
 
-  // Build the path for records and files
+  // Build the path for records and files. These two lines will try to access
+  // the path, and if it doesn't exist, the `makeFolderIfNotExist` function will
+  // create it.
   this.records = this.path + '/records/';
   makeFolderIfNotExist(this.records);
 
   this.files = this.path + '/files/';
   makeFolderIfNotExist(this.files);
 
-  // Read entries
+  // Finally, we start with an empty `Array` of entries, and read them using the
+  // `read` method declared below.
   this.entries = [];
   this.read();
+
+  // At this time, the `Library` object is created and ready to be used. It is a
+  // fairly fast operation (on the order of 1 second to read close to 4000
+  // references on my netbook).
 }
 
+// ## Read the references from the folder
 Library.prototype.read = function() {
   var files = fs.readdirSync(this.records);
   this.entries = [];
