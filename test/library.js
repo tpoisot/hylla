@@ -15,7 +15,13 @@ describe('Library', function() {
       chai.assert.equal(library, lib.path);
     });
 
-    it('should fix the file name if the filename and the key are mismatched');
+    it(
+      'should fix the file name if the filename and the key are mismatched'
+    );
+
+    it(
+      'should create an id if there is no idea given'
+    );
 
   });
 
