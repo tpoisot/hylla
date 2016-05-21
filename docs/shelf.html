@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>shelf.js</title>
+  <title>Library class</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -51,12 +51,6 @@
     
     <ul class="sections">
         
-          <li id="title">
-              <div class="annotation">
-                  <h1>shelf.js</h1>
-              </div>
-          </li>
-        
         
         
         <li id="section-1">
@@ -85,9 +79,7 @@
       fs.mkdirSync(folder);
     }
   });
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Library</span>(<span class="hljs-params">library</span>) </span>{</pre></div></div>
+}</pre></div></div>
             
         </li>
         
@@ -98,15 +90,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Default path if none given</p>
+              <h1 id="library-class">Library class</h1>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">if</span> (library === <span class="hljs-literal">undefined</span>) {
-    <span class="hljs-keyword">var</span> home = process.env.HOME || process.env.USERPROFILE;
-    library = home + <span class="hljs-string">"/.pandoc"</span>;
-  }
-  <span class="hljs-keyword">this</span>.path = path.resolve(library);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/** Library class
+@param {String} library The path to the library
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Library</span>(<span class="hljs-params">library</span>) </span>{</pre></div></div>
             
         </li>
         
@@ -117,15 +108,13 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Build the path for records and files</p>
+              <p>If no path is given, we will assume that the informations are stored in
+<code>pandoc</code>‘s default location, which is supposed to be the <code>.pandoc</code> folder
+in the user’s home / profile folder.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.records = <span class="hljs-keyword">this</span>.path + <span class="hljs-string">"/records/"</span>;
-  makeFolderIfNotExist(<span class="hljs-keyword">this</span>.records);
-
-  <span class="hljs-keyword">this</span>.files = <span class="hljs-keyword">this</span>.path + <span class="hljs-string">"/files/"</span>;
-  makeFolderIfNotExist(<span class="hljs-keyword">this</span>.files);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">if</span> (library === <span class="hljs-literal">undefined</span>) {</pre></div></div>
             
         </li>
         
@@ -136,18 +125,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Read entries</p>
+              <p>This line should make things reasonably cross-platform</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.entries = [];
-  <span class="hljs-keyword">this</span>.read();
-}
-
-Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">var</span> files = fs.readdirSync(<span class="hljs-keyword">this</span>.records);
-  <span class="hljs-keyword">this</span>.entries = [];
-  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; files.length; i++) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> home = process.env.HOME || process.env.USERPROFILE;
+    library = home + <span class="hljs-string">'/.pandoc'</span>;
+  }
+  <span class="hljs-keyword">this</span>.path = path.resolve(library);</pre></div></div>
             
         </li>
         
@@ -158,11 +143,17 @@ Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>This is the file we read FROM</p>
+              <p>Build the path for records and files. These two lines will try to access
+the path, and if it doesn’t exist, the <code>makeFolderIfNotExist</code> function will
+create it.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> loadFrom = <span class="hljs-keyword">this</span>.records + files[i];</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.records = <span class="hljs-keyword">this</span>.path + <span class="hljs-string">'/records/'</span>;
+  makeFolderIfNotExist(<span class="hljs-keyword">this</span>.records);
+
+  <span class="hljs-keyword">this</span>.files = <span class="hljs-keyword">this</span>.path + <span class="hljs-string">'/files/'</span>;
+  makeFolderIfNotExist(<span class="hljs-keyword">this</span>.files);</pre></div></div>
             
         </li>
         
@@ -173,11 +164,13 @@ Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>We can <code>require</code> JSON objects</p>
+              <p>Finally, we start with an empty <code>Array</code> of entries, and read them using the
+<code>read</code> method declared below.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> entry = <span class="hljs-built_in">require</span>(loadFrom);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.entries = [];
+  <span class="hljs-keyword">this</span>.read();</pre></div></div>
             
         </li>
         
@@ -188,11 +181,13 @@ Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>We convert this into an object</p>
+              <p>At this time, the <code>Library</code> object is created and ready to be used. It is a
+fairly fast operation (on the order of 1 second to read close to 4000
+references on my netbook).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> entryObject = <span class="hljs-keyword">new</span> entries.Entry(entry, <span class="hljs-keyword">this</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>}</pre></div></div>
             
         </li>
         
@@ -202,6 +197,69 @@ Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h2 id="read-the-references-from-the-folder">Read the references from the folder</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> files = fs.readdirSync(<span class="hljs-keyword">this</span>.records);
+  <span class="hljs-keyword">this</span>.entries = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; files.length; i++) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>This is the file we read FROM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> loadFrom = <span class="hljs-keyword">this</span>.records + files[i];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>We can <code>require</code> JSON objects</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> entry = <span class="hljs-built_in">require</span>(loadFrom);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>We convert this into an object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> entryObject = <span class="hljs-keyword">new</span> entries.Entry(entry, <span class="hljs-keyword">this</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>If there is no id present, we generate one</p>
 
@@ -214,26 +272,26 @@ Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">
         </li>
         
         
-        <li id="section-9">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>Knowing the id, this is the filename the reference should have</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> loadExpect = <span class="hljs-keyword">this</span>.records + entryObject.id() + <span class="hljs-string">".json"</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> loadExpect = <span class="hljs-keyword">this</span>.records + entryObject.id() + <span class="hljs-string">'.json '</span>;</pre></div></div>
             
         </li>
         
         
-        <li id="section-10">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>If there is a mismatch, we fix it</p>
 
@@ -244,11 +302,11 @@ Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">
         </li>
         
         
-        <li id="section-11">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>by removing the old file</p>
 
@@ -259,11 +317,11 @@ Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">
         </li>
         
         
-        <li id="section-12">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>and writing the correct one</p>
 
@@ -277,11 +335,11 @@ Library.prototype.read = <span class="hljs-function"><span class="hljs-keyword">
         </li>
         
         
-        <li id="section-13">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>Then we add the entry to the library</p>
 
@@ -327,28 +385,28 @@ Library.prototype.write = <span class="hljs-function"><span class="hljs-keyword"
         </li>
         
         
-        <li id="section-14">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>File is used to determine where to write the library</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">if</span> (file === <span class="hljs-literal">undefined</span>) {
-    file = <span class="hljs-keyword">this</span>.path + <span class="hljs-string">"/default.json"</span>;
+    file = <span class="hljs-keyword">this</span>.path + <span class="hljs-string">'/default.json'</span>;
   }</pre></div></div>
             
         </li>
         
         
-        <li id="section-15">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>Keys is an optional array with the keys to extract</p>
 
@@ -359,11 +417,11 @@ Library.prototype.write = <span class="hljs-function"><span class="hljs-keyword"
         </li>
         
         
-        <li id="section-16">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>If not defined, we return all the entries</p>
 
@@ -375,11 +433,11 @@ Library.prototype.write = <span class="hljs-function"><span class="hljs-keyword"
         </li>
         
         
-        <li id="section-17">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>The final step is to filter the correct entries, then map a function to return the content only</p>
 
@@ -388,84 +446,8 @@ Library.prototype.write = <span class="hljs-function"><span class="hljs-keyword"
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> entries = <span class="hljs-keyword">this</span>.entries.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e, i, a</span>) </span>{
     <span class="hljs-keyword">return</span> keys.indexOf(e.id()) &gt; <span class="hljs-number">-1</span>;
   }).map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
-    <span class="hljs-keyword">return</span> e.content
+    <span class="hljs-keyword">return</span> e.content;
   });</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-18">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
-              </div>
-              <p>Finally, we write the entries in the output file</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  fs.writeFileSync(file, <span class="hljs-built_in">JSON</span>.stringify(entries, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>), <span class="hljs-string">'utf-8'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
-    err</span>) </span>{
-    <span class="hljs-keyword">if</span> (err) <span class="hljs-built_in">console</span>.log(err)
-  });
-};
-
-Library.prototype.new = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">infos</span>) </span>{
-  <span class="hljs-keyword">var</span> entry = <span class="hljs-keyword">new</span> entries.Entry(infos);
-  entry.content.id = <span class="hljs-keyword">this</span>.generate(entry.content);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-19">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
-              </div>
-              <p>The reference is written to file</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  fs.writeFileSync(<span class="hljs-keyword">this</span>.records + <span class="hljs-string">"/"</span> + entry.id() + <span class="hljs-string">".json"</span>, entry.json(),
-    <span class="hljs-string">'utf-8'</span>,
-    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
-      <span class="hljs-built_in">console</span>.log(err);
-    });</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-20">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
-              </div>
-              <p>The library is reloaded immediately after</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.read(); <span class="hljs-comment">// IDEA: maybe push instead of reloading?</span></pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-21">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
-              </div>
-              <p>NOTE the id of the new reference is returned because it might be useful</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">return</span> entry.id();
-}
-
-Library.prototype.attach = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">id, file</span>) </span>{
-  <span class="hljs-keyword">var</span> entry = <span class="hljs-keyword">this</span>.entry(id);</pre></div></div>
             
         </li>
         
@@ -476,22 +458,88 @@ Library.prototype.attach = <span class="hljs-function"><span class="hljs-keyword
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>TODO: Only if there is a valid entry</p>
+              <p>Finally, we write the entries in the output file</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> moveFileTo = <span class="hljs-keyword">this</span>.files + id + <span class="hljs-string">".pdf"</span>;
-  fs.stat(file, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, stats</span>) </span>{
-    <span class="hljs-keyword">if</span> (err) {
-      <span class="hljs-built_in">console</span>.log(err);
-    } <span class="hljs-keyword">else</span> {
-      fs.renameSync(file, moveFileTo, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
-        <span class="hljs-keyword">if</span> (e) {
-          <span class="hljs-built_in">console</span>.log(e);
-        }
-      });
-    }
+            <div class="content"><div class='highlight'><pre>  fs.writeFileSync(file, <span class="hljs-built_in">JSON</span>.stringify(entries, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>), <span class="hljs-string">'utf-8'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
+    err</span>) </span>{
+    <span class="hljs-keyword">if</span> (err) <span class="hljs-built_in">console</span>.log(err);
   });
+};
+
+Library.prototype.new = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">infos</span>) </span>{
+  <span class="hljs-keyword">var</span> entry = <span class="hljs-keyword">new</span> entries.Entry(infos);
+  entry.content.id = <span class="hljs-keyword">this</span>.generate(entry.content);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>The reference is written to file</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  fs.writeFileSync(<span class="hljs-keyword">this</span>.records + <span class="hljs-string">'/'</span> + entry.id() + <span class="hljs-string">'.json'</span>, entry.json(),
+    <span class="hljs-string">'utf-8'</span>,
+    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+      <span class="hljs-built_in">console</span>.log(err);
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>The library is reloaded immediately after</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.read(); <span class="hljs-comment">// IDEA: maybe push instead of reloading?</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>NOTE the id of the new reference is returned because it might be useful</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">return</span> entry.id();
+};
+
+Library.prototype.attach = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">id, file</span>) </span>{
+  <span class="hljs-keyword">var</span> entry = <span class="hljs-keyword">this</span>.entry(id);
+  <span class="hljs-keyword">if</span> (entry) {
+    <span class="hljs-keyword">var</span> moveFileTo = <span class="hljs-keyword">this</span>.files + id + <span class="hljs-string">'.pdf'</span>;
+    fs.stat(file, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, stats</span>) </span>{
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-built_in">console</span>.log(err);
+      } <span class="hljs-keyword">else</span> {
+        fs.renameSync(file, moveFileTo, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+          <span class="hljs-keyword">if</span> (e) {
+            <span class="hljs-built_in">console</span>.log(e);
+          }
+        });
+      }
+    });
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'No entry with ID '</span> + id);
+  }
 };
 
 Library.prototype.icanhazpdf = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">id</span>) </span>{
