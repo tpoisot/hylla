@@ -7,6 +7,15 @@ var keys = require('./lib/keys.js');
 var doi = require('./lib/doi.js');
 var pdf = require('./lib/icanhazpdf.js');
 
+/**
+@param {String} folder The folder to use / create
+*/
+function makeFolderIfNotExist(folder) {
+  fs.accessSync(folder, fs.F_OK, function(err) {
+    if (err) fs.mkdirSync(folder);
+  })
+};
+
 function Library(library) {
 
   // Default path if none given
@@ -17,82 +26,77 @@ function Library(library) {
   this.path = path.resolve(library);
 
   // Build the path for records and files
-  this.records = this.path + "/records/"
-  fs.access(this.records, fs.F_OK, (err) => {
-    if (err) fs.mkdirSync(this.records)
-  });
+  this.records = this.path + "/records/";
+  makeFolderIfNotExist(this.records);
 
   this.files = this.path + "/files/";
-  fs.access(this.files, fs.F_OK, (err) => {
-    if (err) fs.mkdirSync(this.files)
-  });
+  makeFolderIfNotExist(this.files);
 
   // Read entries
   this.entries = [];
   this.read();
-
 }
 
-Library.prototype.read = function(id) {
+Library.prototype.read = function() {
   var files = fs.readdirSync(this.records);
   this.entries = [];
   for (var i = 0; i < files.length; i++) {
     // This is the file we read FROM
-    var load_from = this.records + files[i];
+    var loadFrom = this.records + files[i];
     // We can `require` JSON objects
-    var entry = require(load_from);
+    var entry = require(loadFrom);
     // We convert this into an object
-    var entry_object = new entries.Entry(entry, this);
+    var entryObject = new entries.Entry(entry, this);
     // If there is no id present, we generate one
-    if (entry_object.content.id === undefined) {
-      entry_object.content.id = this.generate(entry_object.content);
+    if (entryObject.content.id === undefined) {
+      entryObject.content.id = this.generate(entryObject.content);
     }
     // Knowing the id, this is the filename the reference should have
-    var load_expect = this.records + entry_object.id() + ".json";
+    var loadExpect = this.records + entryObject.id() + ".json";
     // If there is a mismatch, we fix it
-    if (load_expect !== load_from) {
+    if (loadExpect !== loadFrom) {
       // by removing the old file
-      fs.unlinkSync(load_from);
+      fs.unlinkSync(loadFrom);
       // and writing the correct one
-      fs.writeFile(load_expect, entry_object.json(), 'utf-8', function(e) {
+      fs.writeFile(loadExpect, entryObject.json(), 'utf-8', function(e) {
         console.log(e);
       });
     }
     // Then we add the entry to the library
-    this.entries.push(entry_object);
+    this.entries.push(entryObject);
   }
-}
+};
 
 Library.prototype.keys = function() {
   return this.entries.map(function(element, index, array) {
-    return element.id()
+    return element.id();
   });
-}
+};
 
 Library.prototype.entry = function(id) {
   var ok = this.entries.filter(function(element, index, array) {
-    return element.id() === id
+    return element.id() === id;
   });
-  if (ok.length == 1) {
-    return ok[0]
+  if (ok.length === 1) {
+    return ok[0];
   } else {
     return undefined;
   }
-}
+};
 
 Library.prototype.generate = function(entry) {
-  var root_aut = keys.Author(entry).toLowerCase().substr(0, 4);
-  var root_dat = keys.Yr(entry);
-  var root_let = keys.title_first_letters(entry);
-  var root_key = root_aut + root_dat + root_let;
-  var trial_key = root_key;
+  var rootAut = keys.Author(entry).toLowerCase().substr(0, 4);
+  var rootDat = keys.Yr(entry);
+  var rootLet = keys.title_first_letters(entry);
+  var rootKey = rootAut + rootDat + rootLet;
+  var trialKey = rootKey;
   var trials = 1;
-  while (this.entry(trial_key)) {
-    trials = trials + 1;
-    trial_key = root_key + String(trials);
+  while (this.entry(trialKey)) {
+    trials += 1;
+    trialKey = rootKey + String(trials);
   }
-  return trial_key;
-}
+  return trialKey;
+};
 
 Library.prototype.write = function(file, keys) {
   // File is used to determine where to write the library
@@ -106,7 +110,7 @@ Library.prototype.write = function(file, keys) {
   }
   // The final step is to filter the correct entries, then map a function to return the content only
   var entries = this.entries.filter(function(e, i, a) {
-    return keys.indexOf(e.id()) > -1
+    return keys.indexOf(e.id()) > -1;
   }).map(function(e) {
     return e.content
   });
