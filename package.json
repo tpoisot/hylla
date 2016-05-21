@@ -13,7 +13,7 @@
     "url": "git://github.com/tpoisot/shelf.git"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
     "diacritics": "^1.2.3",
@@ -29,6 +29,7 @@
     "eslint": "^2.10.2",
     "eslint-config-google": "^0.5.0",
     "istanbul": "^0.4.3",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.2.0"
   }
 }

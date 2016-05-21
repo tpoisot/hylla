@@ -5,8 +5,6 @@ before_script:
   - npm install -g istanbul
   - npm install
   - mkdir -p test/data/{files,records}
-script:
-  - istanbul cover ./node_modules/mocha/bin/_mocha
 node_js:
   - "6"
   - "5"
