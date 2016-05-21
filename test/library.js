@@ -28,6 +28,10 @@ describe('Library', function() {
       assert_file(library + "/default.json");
     });
 
+    it('should write to a different location');
+    it('should write only the specified keys');
+    it('should write the specified keys to a different location');
+
   });
 
 });
