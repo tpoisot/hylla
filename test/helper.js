@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
-var shelf = require('../shelf.js');
-var lib = new shelf.Library(path.resolve('./test/data'));
+var hylla = require('../hylla.js');
+var lib = new hylla.Library(path.resolve('./test/data'));
 
 function assertIsFile(filename) {
   fs.stat(filename, function(err, stats) {
@@ -13,7 +13,7 @@ global.assertIsFile = assertIsFile;
 
 // Directly add from DOI
 function addRefFromDoi(d) {
-  var info = shelf.doi.refFromDoi(d);
+  var info = hylla.doi.refFromDoi(d);
   return lib.new(info);
 }
 

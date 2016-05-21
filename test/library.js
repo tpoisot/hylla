@@ -5,13 +5,13 @@ describe('Library', function() {
     it('should create the appropriate folders');
 
     it('should create a default path if none is given', function() {
-      // var lib = new shelf.Library();
+      // var lib = new hylla.Library();
       // chai.assert.include(lib.path, ".pandoc");
     });
 
     it('should use the given path if a path is given', function() {
       var library = path.resolve("./test/data");
-      var lib = new shelf.Library(library);
+      var lib = new hylla.Library(library);
       chai.assert.equal(library, lib.path);
     });
 
@@ -29,7 +29,7 @@ describe('Library', function() {
 
     it('should write a default.json file in the path', function() {
       var library = path.resolve("./test/data");
-      var lib = new shelf.Library(library);
+      var lib = new hylla.Library(library);
       lib.write();
       assertIsFile(library + "/default.json");
     });

@@ -1,20 +1,20 @@
 {
-  "name": "shelf",
+  "name": "hylla",
   "version": "0.0.0",
   "description": "References manager",
   "bugs": {
-    "url": "https://github.com/tpoisot/shelf/issues"
+    "url": "https://github.com/tpoisot/hylla/issues"
   },
   "license": "MIT",
   "author": "Timothée Poisot",
-  "main": "shelf.js",
+  "main": "hylla.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/tpoisot/shelf.git"
+    "url": "git://github.com/tpoisot/hylla.git"
   },
   "scripts": {
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
-    "doc": "docco shelf.js lib/*.js"
+    "doc": "docco hylla.js lib/*.js"
   },
   "dependencies": {
     "diacritics": "^1.2.3",
