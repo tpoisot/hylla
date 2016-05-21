@@ -25,7 +25,7 @@ describe('Library', function() {
       var library = path.resolve("./test/data");
       var lib = new shelf.Library(library);
       lib.write();
-      chai.assert.isFile(library + "/default.json");
+      assert_file(library + "/default.json");
     });
 
   });

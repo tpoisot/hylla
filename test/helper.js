@@ -3,6 +3,12 @@ var path = require('path');
 var shelf = require('../shelf.js');
 var lib = new shelf.Library(path.resolve("./test/data"));
 
+assert_file = function(filename) {
+  fs.stat(filename, function(err, stats) {
+    if (err) throw(err);
+  });
+}
+
 before(function() {
   // Directly add from DOI
   function add_from_doi(d) {

@@ -1,5 +1,4 @@
 global.chai = require('chai');
-global.chai.use(require('chai-fs'));
 global.path = require('path');
 global.fs = require('fs');
 

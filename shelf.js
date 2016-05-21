@@ -16,21 +16,12 @@ function Library(library) {
   }
   this.path = path.resolve(library);
 
-  // Build the path for records, files, and file db
+  // Build the path for records and files
   this.records = this.path + "/records/"
   fs.access(this.records, fs.F_OK, (err) => {if(err) fs.mkdirSync(this.records)});
 
   this.files = this.path + "/files/";
   fs.access(this.files, fs.F_OK, (err) => {if(err) fs.mkdirSync(this.files)});
-
-  // TODO: read files pdf as an object
-  /* NOTE:
-  About files...
-  They will be named files/key.1.pdf files/key.2.pdf
-  So when the key change, we can just look for matching filenames, and replace
-  This should remove the need to store infos in either the json file itself,
-  or an external json file
-  */
 
   // Read entries
   this.entries = [];

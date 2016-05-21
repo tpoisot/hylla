@@ -16,17 +16,16 @@
     "test": "./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
-    "chai": "^3.5.0",
-    "crypto": "0.0.3",
     "diacritics": "^1.2.3",
     "fs": "0.0.2",
     "keyword-extractor": "0.0.12",
-    "mocha": "^2.4.5",
     "os": "^0.1.1",
     "path": "^0.12.7",
     "sync-request": "^3.0.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
     "coveralls": "^2.11.9",
     "mocha-lcov-reporter": "^1.2.0"
   }
