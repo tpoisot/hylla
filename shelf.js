@@ -1,5 +1,4 @@
 var fs = require('fs');
-var os = require('os');
 var path = require('path');
 
 var entries = require('./lib/entries.js');
@@ -12,9 +11,11 @@ var pdf = require('./lib/icanhazpdf.js');
 */
 function makeFolderIfNotExist(folder) {
   fs.accessSync(folder, fs.F_OK, function(err) {
-    if (err) fs.mkdirSync(folder);
-  })
-};
+    if (err) {
+      fs.mkdirSync(folder);
+    }
+  });
+}
 
 function Library(library) {
 
@@ -157,7 +158,7 @@ Library.prototype.icanhazpdf = function(id) {
   var entry = this.entry(id);
   var file = pdf.get(entry.doi());
   this.attach(entry.id(), file);
-}
+};
 
 module.exports.Library = Library;
 module.exports.keys = keys;
