@@ -48,7 +48,7 @@ describe('Entries', function() {
       var newref = lib.new(ref);
       // First we check the key
       chai.assert.equal(newref, 'gray15tts');
-      assert_file(lib.records + "/" + newref + ".json");
+      assertIsFile(lib.records + "/" + newref + ".json");
       // Then we remove the file
       fs.unlinkSync(lib.records + "/" + newref + ".json");
     });

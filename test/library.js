@@ -31,7 +31,7 @@ describe('Library', function() {
       var library = path.resolve("./test/data");
       var lib = new shelf.Library(library);
       lib.write();
-      assert_file(library + "/default.json");
+      assertIsFile(library + "/default.json");
     });
 
     it('should write to a different location');

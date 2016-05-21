@@ -23,14 +23,22 @@ describe('PDF finder', function() {
   });
 
   describe('download module', function() {
+
     it('should work with plos journals', function() {
-      shelf.pdf.get("10.1371/journal.pcbi.0030102");
-      assert_file("10fizz1371buzzjournalfizzpcbifizz0030102.pdf");
-      fs.unlinkSync("10fizz1371buzzjournalfizzpcbifizz0030102.pdf");
+      shelf.pdf.get('10.1371/journal.pcbi.0030102');
+      assertIsFile('10fizz1371buzzjournalfizzpcbifizz0030102.pdf');
+      fs.unlinkSync('10fizz1371buzzjournalfizzpcbifizz0030102.pdf');
     });
+
+    it('should work with royal society journals', function() {
+      shelf.pdf.get('10.1098/rspb.2009.2139');
+      assertIsFile('10fizz1098buzzrspbfizz2009fizz2139.pdf');
+      fs.unlinkSync('10fizz1098buzzrspbfizz2009fizz2139.pdf');
+    });
+
     it('should work from the library', function() {
-      var lib = new shelf.Library(path.resolve("./test/data"));
-      var doi = "10.1371/journal.pcbi.0030102";
+      var lib = new shelf.Library(path.resolve('./test/data'));
+      var doi = '10.1371/journal.pcbi.0030102';
       var ref = shelf.doi.refFromDoi(doi);
       var newref = lib.new(ref);
       lib.icanhazpdf(newref);

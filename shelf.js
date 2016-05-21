@@ -10,11 +10,11 @@ var pdf = require('./lib/icanhazpdf.js');
 @param {String} folder The folder to use / create
 */
 function makeFolderIfNotExist(folder) {
-  fs.accessSync(folder, fs.F_OK, function(err) {
-    if (err) {
-      fs.mkdirSync(folder);
-    }
-  });
+  try {
+    fs.statSync(folder).isDirectory();
+  } catch (err) {
+    fs.mkdirSync(folder);
+  }
 }
 
 // # Library class
@@ -31,6 +31,7 @@ function Library(library) {
     library = home + '/.pandoc';
   }
   this.path = path.resolve(library);
+  makeFolderIfNotExist(this.path);
 
   // Build the path for records and files. These two lines will try to access
   // the path, and if it doesn't exist, the `makeFolderIfNotExist` function will
@@ -58,10 +59,9 @@ Library.prototype.read = function() {
   for (var i = 0; i < files.length; i++) {
     // This is the file we read FROM
     var loadFrom = this.records + files[i];
-    // We can `require` JSON objects
-    var entry = require(loadFrom);
+    var entry = fs.readFileSync(loadFrom, 'utf-8');
     // We convert this into an object
-    var entryObject = new entries.Entry(entry, this);
+    var entryObject = new entries.Entry(JSON.parse(entry), this);
     // If there is no id present, we generate one
     if (entryObject.content.id === undefined) {
       entryObject.content.id = this.generate(entryObject.content);
@@ -69,7 +69,8 @@ Library.prototype.read = function() {
     // Knowing the id, this is the filename the reference should have
     var loadExpect = this.records + entryObject.id() + '.json ';
     // If there is a mismatch, we fix it
-    if (loadExpect !== loadFrom) {
+    if (loadExpect.trim() !== loadFrom.trim()) {
+      console.log('Change ' + loadFrom + ' to ' + loadExpect);
       // by removing the old file
       fs.unlinkSync(loadFrom);
       // and writing the correct one
