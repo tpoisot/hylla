@@ -20,6 +20,11 @@
             <div id="jump_page">
               
                 
+                <a class="source" href="hylla.html">
+                  hylla.js
+                </a>
+              
+                
                 <a class="source" href="doi.html">
                   doi.js
                 </a>
@@ -37,11 +42,6 @@
                 
                 <a class="source" href="keys.html">
                   keys.js
-                </a>
-              
-                
-                <a class="source" href="hylla.html">
-                  hylla.js
                 </a>
               
             </div>
@@ -218,22 +218,29 @@ function by publisher to get the PDF URL.</p>
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPdfFromPlos</span>(<span class="hljs-params">doi</span>) </span>{
-  <span class="hljs-keyword">var</span> PLOS = {
-    <span class="hljs-string">'cbi'</span>: <span class="hljs-string">'compbiol'</span>,
-    <span class="hljs-string">'med'</span>: <span class="hljs-string">'medicine'</span>,
-    <span class="hljs-string">'pat'</span>: <span class="hljs-string">'pathogens'</span>,
-    <span class="hljs-string">'one'</span>: <span class="hljs-string">'one'</span>,
-    <span class="hljs-string">'ntd'</span>: <span class="hljs-string">'ntds'</span>,
-    <span class="hljs-string">'bio'</span>: <span class="hljs-string">'biology'</span>
-  };
-  <span class="hljs-keyword">var</span> match = <span class="hljs-regexp">/10\.1371\/journal\.p(pat|one|med|gen|ntd|bio|cbi)\./</span>.exec(doi);
-  <span class="hljs-keyword">var</span> journal = match[<span class="hljs-number">1</span>];
-  <span class="hljs-keyword">var</span> url = <span class="hljs-string">'http://www.plos'</span> + PLOS[journal] +
-    <span class="hljs-string">'.org/article/fetchObject.action?uri=info:doi/'</span> + doi +
-    <span class="hljs-string">'&amp;representation=PDF'</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPdfFromRoyalSociety</span>(<span class="hljs-params">doi</span>) </span>{
+  <span class="hljs-keyword">var</span> url;
+  <span class="hljs-keyword">var</span> res = request(<span class="hljs-string">'GET'</span>, <span class="hljs-string">'http://dx.doi.org/'</span> + doi);
+  <span class="hljs-keyword">var</span> ftext = res.getBody(<span class="hljs-string">'utf-8'</span>);
+  <span class="hljs-keyword">var</span> pdf = <span class="hljs-regexp">/http:\/\/(.+)\.full\.pdf/g</span>.exec(ftext);
+  <span class="hljs-keyword">if</span> (pdf.length &gt; <span class="hljs-number">0</span>) {
+    url = pdf[<span class="hljs-number">0</span>];
+  }
   <span class="hljs-keyword">return</span> url;
-}</pre></div></div>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPdfFromWiley</span>(<span class="hljs-params">doi</span>) </span>{
+  <span class="hljs-keyword">var</span> url;
+  <span class="hljs-keyword">var</span> res = request(<span class="hljs-string">'GET'</span>, <span class="hljs-string">'http://onlinelibrary.wiley.com/doi/'</span> + doi + <span class="hljs-string">'/pdf'</span>);
+  <span class="hljs-keyword">var</span> ftext = res.getBody(<span class="hljs-string">'utf-8'</span>);
+  <span class="hljs-keyword">var</span> asset = <span class="hljs-regexp">/id="pdfDocument" src="(.+asset.+)" width/</span>.exec(ftext);
+  <span class="hljs-keyword">if</span> (asset.length &gt; <span class="hljs-number">1</span>) {
+    url = asset[<span class="hljs-number">1</span>];
+  }
+  <span class="hljs-keyword">return</span> url;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPdfFromPlos</span>(<span class="hljs-params">doi</span>) </span>{</pre></div></div>
             
         </li>
         
@@ -243,6 +250,67 @@ function by publisher to get the PDF URL.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>All PLOS journals have a similar DOI structure, with <code>p</code> and a three letter
+code, so this is easy to get the journal name from the DOI.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> PLOS = {
+    cbi: <span class="hljs-string">'compbiol'</span>,
+    med: <span class="hljs-string">'medicine'</span>,
+    pat: <span class="hljs-string">'pathogens'</span>,
+    one: <span class="hljs-string">'one'</span>,
+    ntd: <span class="hljs-string">'ntds'</span>,
+    bio: <span class="hljs-string">'biology'</span>
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Note that (unless PLOS creates a new journal) the doi cannot be anything
+else. This is the same possibilities used in the function to identify PLOS
+as a publisher.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> match = <span class="hljs-regexp">/10\.1371\/journal\.p(pat|one|med|gen|ntd|bio|cbi)\./</span>.exec(doi);
+  <span class="hljs-keyword">var</span> journal = match[<span class="hljs-number">1</span>];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>From the journal name, we can simply re-construct the PDF URL, and return
+this.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> url = <span class="hljs-string">'http://www.plos'</span> + PLOS[journal] +
+    <span class="hljs-string">'.org/article/fetchObject.action?uri=info:doi/'</span> + doi +
+    <span class="hljs-string">'&amp;representation=PDF'</span>;
+  <span class="hljs-keyword">return</span> url;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <h2 id="get-the-pdf-from-a-doi">Get the PDF from a DOI</h2>
 
@@ -256,14 +324,16 @@ function by publisher to get the PDF URL.</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>We will pretend to be a browser, most publishers won’t let us access the
-pdf without this</p>
+pdf without this. Specifically, we pretend to be someone using a fairly
+recent version of OS X with a strangely out of date version of firefox. The
+perfect academic, in short.</p>
 
             </div>
             
@@ -274,27 +344,29 @@ pdf without this</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>If we get a publisher…</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">if</span> (publisher === <span class="hljs-literal">undefined</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
-  <span class="hljs-keyword">if</span> (publisher === <span class="hljs-string">'plos'</span>) url = getPdfFromPlos(doi);</pre></div></div>
+  <span class="hljs-keyword">if</span> (publisher === <span class="hljs-string">'plos'</span>) url = getPdfFromPlos(doi);
+  <span class="hljs-keyword">if</span> (publisher === <span class="hljs-string">'royal_society'</span>) url = getPdfFromRoyalSociety(doi);
+  <span class="hljs-keyword">if</span> (publisher === <span class="hljs-string">'wiley'</span>) url = getPdfFromWiley(doi);</pre></div></div>
             
         </li>
         
         
-        <li id="section-14">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>The name of the PDF is temporarily changed, to avoid issues with slashes
 and periods</p>
@@ -306,11 +378,11 @@ and periods</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>Now we download the pdf</p>
 
@@ -322,8 +394,22 @@ and periods</p>
     }
   });
 
-  <span class="hljs-keyword">var</span> content = pdf_content.getBody();
-  fs.writeFileSync(fname, content, <span class="hljs-string">'utf-8'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+  <span class="hljs-keyword">var</span> content = pdf_content.getBody();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>TODO: error code</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  fs.writeFileSync(fname, content, <span class="hljs-string">'utf-8'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
     <span class="hljs-keyword">if</span> (e) <span class="hljs-built_in">console</span>.log(e);
   });
   <span class="hljs-keyword">return</span> fname;</pre></div></div>
@@ -331,11 +417,11 @@ and periods</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>It failed? This should happen sometimes</p>
 

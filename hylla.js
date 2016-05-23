@@ -54,7 +54,9 @@ function Library(library) {
 
 // ## Read the references from the folder
 Library.prototype.read = function() {
+  // The path where the files are is part of the object
   var files = fs.readdirSync(this.records);
+  // We create an empty array to store the records
   this.entries = [];
   for (var i = 0; i < files.length; i++) {
     // This is the file we read FROM
