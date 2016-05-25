@@ -91,12 +91,17 @@ Library.prototype.keys = function() {
   });
 };
 
-Library.prototype.entry = function(id) {
-  var ok = this.entries.filter(function(element, index, array) {
-    return element.id() === id;
+Library.prototype.select = function(ids) {
+  return this.entries.filter(function(element, index, array) {
+    return ids.indexOf(element.id()) !== -1;
   });
-  return ok.length === 1 ? ok[0] : undefined;
 };
+
+Library.prototype.entry = function(id) {
+  var get_ref = this.select([id]);
+  return get_ref.length === 1 ? get_ref[0] : undefined;
+};
+
 
 Library.prototype.generate = function(entry) {
   var rootAut = keys.nameOfFirstAuthor(entry).toLowerCase().substr(0, 4);
