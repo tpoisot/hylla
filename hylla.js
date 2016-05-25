@@ -95,11 +95,7 @@ Library.prototype.entry = function(id) {
   var ok = this.entries.filter(function(element, index, array) {
     return element.id() === id;
   });
-  if (ok.length === 1) {
-    return ok[0];
-  } else {
-    return undefined;
-  }
+  return ok.length === 1 ? ok[0] : undefined;
 };
 
 Library.prototype.generate = function(entry) {
