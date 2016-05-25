@@ -127,9 +127,7 @@ Library.prototype.write = function(file, keys) {
     keys = this.keys();
   }
   // The final step is to filter the correct entries, then map a function to return the content only
-  var entries = this.entries.filter(function(e, i, a) {
-    return keys.indexOf(e.id()) > -1;
-  }).map(function(e) {
+  var entries = this.select(keys).map(function(e) {
     return e.content;
   });
   // Finally, we write the entries in the output file
@@ -141,13 +139,28 @@ Library.prototype.write = function(file, keys) {
 
 Library.prototype.new = function(infos) {
   var entry = new entries.Entry(infos);
-  entry.content.id = this.generate(entry.content);
-  // The reference is written to file
-  fs.writeFileSync(this.records + '/' + entry.id() + '.json', entry.json(),
-    'utf-8',
-    function(err) {
-      console.log(err);
-    });
+  // Look for existing DOI
+  var doi_match = this.entries.filter(function(e, i, a) {
+    if (e.doi() && entry.doi())  {
+      return e.doi().trim().toLowerCase() == entry.doi().trim().toLowerCase();
+    } else {
+      return false;
+    }
+  });
+  // Is there a match?
+  if (doi_match.length > 0) {
+    // Note that this is transparent for the user -- it give the same
+    // output if it's a new, or existing, reference.
+    entry = doi_match[0];
+  } else {
+    entry.content.id = this.generate(entry.content);
+    // The reference is written to file
+    fs.writeFileSync(this.records + '/' + entry.id() + '.json', entry.json(),
+      'utf-8',
+      function(err) {
+        if (err) console.log(err);
+      });
+  }
   // The library is reloaded immediately after
   this.read(); // IDEA: maybe push instead of reloading?
   // NOTE the id of the new reference is returned because it might be useful
@@ -174,10 +187,25 @@ Library.prototype.attach = function(id, file) {
   }
 };
 
+Library.prototype.icanhazpdfs = function(ids) {
+  var entries = this.select(ids);
+  var pdfs = entries.map(function(e, i, a) {
+    var file;
+    if (e.doi()) {
+      file = pdf.get(e.doi());
+    }
+    return [e.id(), file];
+  });
+  for (var i = 0; i < pdfs.length; i++) {
+    var file_info = pdfs[i];
+    if (file_info[1]) {
+      this.attach(file_info[0], file_info[1]);
+    }
+  }
+};
+
 Library.prototype.icanhazpdf = function(id) {
-  var entry = this.entry(id);
-  var file = pdf.get(entry.doi());
-  this.attach(entry.id(), file);
+  this.icanhazpdfs([id]);
 };
 
 module.exports.Library = Library;
