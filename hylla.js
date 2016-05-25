@@ -102,7 +102,6 @@ Library.prototype.entry = function(id) {
   return get_ref.length === 1 ? get_ref[0] : undefined;
 };
 
-
 Library.prototype.generate = function(entry) {
   var rootAut = keys.nameOfFirstAuthor(entry).toLowerCase().substr(0, 4);
   var rootDat = keys.lastDigitsOfYear(entry);
