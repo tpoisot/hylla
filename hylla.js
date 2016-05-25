@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var fuzzaldrin = require('fuzzaldrin');
 
 var entries = require('./lib/entries.js');
 var keys = require('./lib/keys.js');
@@ -141,7 +142,7 @@ Library.prototype.new = function(infos) {
   // Look for existing DOI
   var doi_match = this.entries.filter(function(e, i, a) {
     var same = false;
-    if (e.doi() && entry.doi())  {
+    if (e.doi() && entry.doi()) {
       same = e.doi().trim().toLowerCase() === entry.doi().trim().toLowerCase();
     }
     return same;
@@ -205,6 +206,18 @@ Library.prototype.icanhazpdfs = function(ids) {
 
 Library.prototype.icanhazpdf = function(id) {
   this.icanhazpdfs([id]);
+};
+
+Library.prototype.searchByTitle = function(query) {
+  var candidates = this.entries.map(function(e) {
+    return e.content;
+  });
+  var results = fuzzaldrin.filter(candidates, query, {
+    key: 'title'
+  }).map(function(e) {
+    return e.id;
+  });
+  return results;
 };
 
 module.exports.Library = Library;
