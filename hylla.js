@@ -141,11 +141,11 @@ Library.prototype.new = function(infos) {
   var entry = new entries.Entry(infos);
   // Look for existing DOI
   var doi_match = this.entries.filter(function(e, i, a) {
+    var same = false;
     if (e.doi() && entry.doi())  {
-      return e.doi().trim().toLowerCase() == entry.doi().trim().toLowerCase();
-    } else {
-      return false;
+      same = e.doi().trim().toLowerCase() === entry.doi().trim().toLowerCase();
     }
+    return same;
   });
   // Is there a match?
   if (doi_match.length > 0) {
