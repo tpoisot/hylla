@@ -12,7 +12,8 @@ var pdf = require('./lib/icanhazpdf.js');
 */
 function makeFolderIfNotExist(folder) {
   try {
-    fs.statSync(folder).isDirectory();
+    fs.statSync(folder)
+      .isDirectory();
   } catch (err) {
     fs.mkdirSync(folder);
   }
@@ -54,7 +55,7 @@ function Library(library) {
 }
 
 // ## Read the references from the folder
-Library.prototype.read = function() {
+Library.prototype.read = function () {
   // The path where the files are is part of the object
   var files = fs.readdirSync(this.records);
   // We create an empty array to store the records
@@ -77,7 +78,7 @@ Library.prototype.read = function() {
       // by removing the old file
       fs.unlinkSync(loadFrom);
       // and writing the correct one
-      fs.writeFile(loadExpect, entryObject.json(), 'utf-8', function(e) {
+      fs.writeFile(loadExpect, entryObject.json(), 'utf-8', function (e) {
         console.log(e);
       });
     }
@@ -86,25 +87,27 @@ Library.prototype.read = function() {
   }
 };
 
-Library.prototype.keys = function() {
-  return this.entries.map(function(element, index, array) {
+Library.prototype.keys = function () {
+  return this.entries.map(function (element, index, array) {
     return element.id();
   });
 };
 
-Library.prototype.select = function(ids) {
-  return this.entries.filter(function(element, index, array) {
+Library.prototype.select = function (ids) {
+  return this.entries.filter(function (element, index, array) {
     return ids.indexOf(element.id()) !== -1;
   });
 };
 
-Library.prototype.entry = function(id) {
+Library.prototype.entry = function (id) {
   var get_ref = this.select([id]);
   return get_ref.length === 1 ? get_ref[0] : undefined;
 };
 
-Library.prototype.generate = function(entry) {
-  var rootAut = keys.nameOfFirstAuthor(entry).toLowerCase().substr(0, 4);
+Library.prototype.generate = function (entry) {
+  var rootAut = keys.nameOfFirstAuthor(entry)
+    .toLowerCase()
+    .substr(0, 4);
   var rootDat = keys.lastDigitsOfYear(entry);
   var rootLet = keys.firstLettersOfTitle(entry);
   var rootKey = rootAut + rootDat + rootLet;
@@ -117,33 +120,37 @@ Library.prototype.generate = function(entry) {
   return trialKey;
 };
 
-Library.prototype.json = function(ids) {
+Library.prototype.json = function (ids) {
   ids = ids ? ids : this.keys();
   var entries = this.select(ids);
-  return JSON.stringify(entries.map(function(e) {
+  return JSON.stringify(entries.map(function (e) {
     return e.content;
   }), null, 2);
 };
 
-Library.prototype.write = function(file, keys) {
+Library.prototype.write = function (file, keys) {
   // File is used to determine where to write the library
   if (file === undefined) {
     file = this.path + '/default.json';
   }
   // Finally, we write the entries in the output file
-  fs.writeFileSync(file, this.json(keys), 'utf-8', function(
+  fs.writeFileSync(file, this.json(keys), 'utf-8', function (
     err) {
     if (err) console.log(err);
   });
 };
 
-Library.prototype.new = function(infos) {
+Library.prototype.new = function (infos) {
   var entry = new entries.Entry(infos);
   // Look for existing DOI
-  var doi_match = this.entries.filter(function(e, i, a) {
+  var doi_match = this.entries.filter(function (e, i, a) {
     var same = false;
     if (e.doi() && entry.doi()) {
-      same = e.doi().trim().toLowerCase() === entry.doi().trim().toLowerCase();
+      same = e.doi()
+        .trim()
+        .toLowerCase() === entry.doi()
+        .trim()
+        .toLowerCase();
     }
     return same;
   });
@@ -157,7 +164,7 @@ Library.prototype.new = function(infos) {
     // The reference is written to file
     fs.writeFileSync(this.records + '/' + entry.id() + '.json', entry.json(),
       'utf-8',
-      function(err) {
+      function (err) {
         if (err) console.log(err);
       });
   }
@@ -167,15 +174,15 @@ Library.prototype.new = function(infos) {
   return entry.id();
 };
 
-Library.prototype.attach = function(id, file) {
+Library.prototype.attach = function (id, file) {
   var entry = this.entry(id);
   if (entry) {
     var moveFileTo = this.files + id + '.pdf';
-    fs.stat(file, function(err, stats) {
+    fs.stat(file, function (err, stats) {
       if (err) {
         console.log(err);
       } else {
-        fs.renameSync(file, moveFileTo, function(e) {
+        fs.renameSync(file, moveFileTo, function (e) {
           if (e) {
             console.log(e);
           }
@@ -187,9 +194,27 @@ Library.prototype.attach = function(id, file) {
   }
 };
 
-Library.prototype.icanhazpdfs = function(ids) {
+Library.prototype.fix = function (id) {
+  if (this.entry(id)) {
+    var entry = this.entry(id);
+    if (entry.doi()) {
+      var updatedInfo = doi.refFromDoi(entry.doi());
+      if (updatedInfo) {
+        updatedInfo.id = entry.id();
+        fs.writeFileSync(this.records + '/' + entry.id() + '.json', entry.json(),
+          'utf-8',
+          function (err) {
+            if (err) console.log(err);
+          });
+        this.read();
+      }
+    }
+  }
+};
+
+Library.prototype.icanhazpdfs = function (ids) {
   var entries = this.select(ids);
-  var pdfs = entries.map(function(e, i, a) {
+  var pdfs = entries.map(function (e, i, a) {
     var file;
     if (e.doi()) {
       file = pdf.get(e.doi());
@@ -204,19 +229,20 @@ Library.prototype.icanhazpdfs = function(ids) {
   }
 };
 
-Library.prototype.icanhazpdf = function(id) {
+Library.prototype.icanhazpdf = function (id) {
   this.icanhazpdfs([id]);
 };
 
-Library.prototype.searchByTitle = function(query) {
-  var candidates = this.entries.map(function(e) {
+Library.prototype.searchByTitle = function (query) {
+  var candidates = this.entries.map(function (e) {
     return e.content;
   });
   var results = fuzzaldrin.filter(candidates, query, {
-    key: 'title'
-  }).map(function(e) {
-    return e.id;
-  });
+      key: 'title'
+    })
+    .map(function (e) {
+      return e.id;
+    });
   return results;
 };
 
