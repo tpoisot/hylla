@@ -198,10 +198,12 @@ Library.prototype.fix = function (id) {
   if (this.entry(id)) {
     var entry = this.entry(id);
     if (entry.doi()) {
+      console.log(entry.doi());
       var updatedInfo = doi.refFromDoi(entry.doi());
       if (updatedInfo) {
         updatedInfo.id = entry.id();
-        fs.writeFileSync(this.records + '/' + entry.id() + '.json', entry.json(),
+        fs.writeFileSync(this.records + '/' + entry.id() + '.json',
+          JSON.stringify(updatedInfo, null, 2),
           'utf-8',
           function (err) {
             if (err) console.log(err);
