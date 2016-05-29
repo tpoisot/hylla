@@ -32,18 +32,22 @@ function citeprocizeRef(data) {
   // Cleanup the affiliations, etc
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
-      if (data[key]['date-time']) {
-        delete data[key]['date-time'];
-      }
-      if (data[key]['timestamp']) {
-        delete data[key]['timestamp'];
-      }
-      if (key === 'author' | key === 'editor') {
-        data[key].map(function (e) {
-          if (e.affiliation) delete e.affiliation;
-          if (e['parse-names']) delete e['parse-names'];
-          return 0;
-        })
+      if (data[key] === null) {
+        delete data[key]
+      } else {
+        if (data[key]['date-time']) {
+          delete data[key]['date-time'];
+        }
+        if (data[key]['timestamp']) {
+          delete data[key]['timestamp'];
+        }
+        if (key === 'author' | key === 'editor') {
+          data[key].map(function (e) {
+            if (e.affiliation) delete e.affiliation;
+            if (e['parse-names']) delete e['parse-names'];
+            return 0;
+          })
+        }
       }
     }
   }
