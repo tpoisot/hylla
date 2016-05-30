@@ -18,6 +18,9 @@ function citeprocizeRef(data) {
   if (data.type === 'proceedings-article') {
     data.type = 'paper-conference';
   }
+  if (data.type === 'book-chapter') {
+    data.type = 'chapter';
+  }
   // Fields to remove
   var alwaysRemove = ['license', 'source', 'prefix', 'member', 'score',
     'subtitle', 'subject', 'alternative-id', 'reference-count', 'keyword',
