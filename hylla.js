@@ -21,6 +21,9 @@ function citeprocizeRef(data) {
   if (data.type === 'book-chapter') {
     data.type = 'chapter';
   }
+  if (data.type === 'misc') {
+    data.type = 'entry';
+  }
   // Fields to remove
   var alwaysRemove = ['license', 'source', 'prefix', 'member', 'score',
     'subtitle', 'subject', 'alternative-id', 'reference-count', 'keyword',
