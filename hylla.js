@@ -24,6 +24,9 @@ function citeprocizeRef(data) {
   if (data.type === 'misc') {
     data.type = 'entry';
   }
+  if (data.type === 'monograph') {
+    data.type = 'book';
+  }
   // Fields to remove
   var alwaysRemove = ['license', 'source', 'prefix', 'member', 'score',
     'subtitle', 'subject', 'alternative-id', 'reference-count', 'keyword',
