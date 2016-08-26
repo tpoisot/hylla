@@ -18,11 +18,9 @@
   },
   "dependencies": {
     "diacritics": "^1.2.3",
-    "fs": "0.0.2",
     "fuzzaldrin": "^2.1.0",
     "keyword-extractor": "0.0.12",
     "os": "^0.1.1",
-    "path": "^0.12.7",
     "sync-request": "^3.0.1"
   },
   "devDependencies": {
